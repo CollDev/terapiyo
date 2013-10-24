@@ -1,0 +1,85 @@
+/* 
+    Created on : 24/10/2013, 01:20:04 PM
+    Author     : Joe Robles <joe.robles.pdj@gmail.com>
+*/
+.yoga-adultos, .yoga, .volver, .teatro, .reiki, .pilates, .logotipo, .impro, .el-terapiyo, .curso-el-terapiyo, .coaching, .cerrar, .brain-gym{
+    background: url("../img/sprites.png") no-repeat;
+}
+
+.yoga-adultos{
+    background-position: -602px -215px ;
+    width: 129px;
+    height: 125px;
+}
+
+.yoga{
+    background-position: -288px -16px ;
+    width: 117px;
+    height: 117px;
+}
+
+.volver{
+    background-position: -460px -145px ;
+    width: 79px;
+    height: 32px;
+}
+
+.teatro{
+    background-position: -286px -258px ;
+    width: 117px;
+    height: 117px;
+}
+
+.reiki{
+    background-position: -668px -8px ;
+    width: 117px;
+    height: 117px;
+}
+
+.pilates{
+    background-position: -410px -8px ;
+    width: 125px;
+    height: 128px;
+}
+
+.logotipo{
+    background-position: -286px -378px ;
+    width: 305px;
+    height: 97px;
+}
+
+.impro{
+    background-position: -539px -8px ;
+    width: 124px;
+    height: 129px;
+}
+
+.el-terapiyo{
+    background-position: 0 0;
+    width: 283px;
+    height: 475px;
+}
+
+.curso-el-terapiyo{
+    background-position: -406px -182px ;
+    width: 193px;
+    height: 192px;
+}
+
+.coaching{
+    background-position: -606px -346px ;
+    width: 124px;
+    height: 129px;
+}
+
+.cerrar{
+    background-position: -414px -140px ;
+    width: 37px;
+    height: 37px;
+}
+
+.brain-gym{
+    background-position: -286px -138px ;
+    width: 117px;
+    height: 117px;
+}

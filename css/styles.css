@@ -4,7 +4,17 @@
 */
 .background {
     background: url("../images/background.jpg") no-repeat;
+    background-size: 100% 100%;
+}
+.el-terapiyo {
+    background: url("../images/el-terapiyo.png") no-repeat center top;
 }
 .footer {
     background: #afca08;
+}
+.facebook-widget {
+    
+}
+.twitter-widget {
+    
 }

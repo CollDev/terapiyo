@@ -1,85 +1,76 @@
-/* 
-    Created on : 24/10/2013, 01:20:04 PM
-    Author     : Joe Robles <joe.robles.pdj@gmail.com>
-*/
-.yoga-adultos, .yoga, .volver, .teatro, .reiki, .pilates, .logotipo, .impro, .el-terapiyo, .curso-el-terapiyo, .coaching, .cerrar, .brain-gym{
+.yoga-adultos, .yoga, .volver, .teatro, .reiki, .pilates, .logotipo, .impro, .curso-el-terapiyo, .coaching, .cerrar, .brain-gym{
     background: url("../img/sprites.png") no-repeat;
+    display: block;
 }
 
 .yoga-adultos{
-    background-position: -602px -215px ;
+    background-position: -316px -207px ;
     width: 129px;
     height: 125px;
 }
 
 .yoga{
-    background-position: -288px -16px ;
+    background-position: -2px -8px ;
     width: 117px;
     height: 117px;
 }
 
 .volver{
-    background-position: -460px -145px ;
+    background-position: -174px -137px ;
     width: 79px;
     height: 32px;
 }
 
 .teatro{
-    background-position: -286px -258px ;
+    background-position: 0 -250px ;
     width: 117px;
     height: 117px;
 }
 
 .reiki{
-    background-position: -668px -8px ;
+    background-position: -382px 0;
     width: 117px;
     height: 117px;
 }
 
 .pilates{
-    background-position: -410px -8px ;
+    background-position: -124px 0;
     width: 125px;
     height: 128px;
 }
 
 .logotipo{
-    background-position: -286px -378px ;
+    background-position: 0 -370px ;
     width: 305px;
     height: 97px;
 }
 
 .impro{
-    background-position: -539px -8px ;
+    background-position: -253px 0;
     width: 124px;
     height: 129px;
 }
 
-.el-terapiyo{
-    background-position: 0 0;
-    width: 283px;
-    height: 475px;
-}
-
 .curso-el-terapiyo{
-    background-position: -406px -182px ;
+    background-position: -120px -174px ;
     width: 193px;
     height: 192px;
 }
 
 .coaching{
-    background-position: -606px -346px ;
+    background-position: -320px -338px ;
     width: 124px;
     height: 129px;
 }
 
 .cerrar{
-    background-position: -414px -140px ;
+    background-position: -128px -132px ;
     width: 37px;
     height: 37px;
 }
 
 .brain-gym{
-    background-position: -286px -138px ;
+    background-position: 0 -130px ;
     width: 117px;
     height: 117px;
 }

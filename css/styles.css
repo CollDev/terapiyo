@@ -2,3 +2,9 @@
     Created on : 24/10/2013, 12:54:09 PM
     Author     : Joe Robles <joe.robles.pdj@gmail.com>
 */
+.background {
+    background: url("../images/background.jpg") no-repeat;
+}
+.footer {
+    background: #afca08;
+}

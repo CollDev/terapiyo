@@ -5,10 +5,12 @@
 .background {
     background: url("../images/background.jpg") no-repeat;
     background-size: 100% 100%;
-    padding-top: 82px;
 }
 .el-terapiyo {
     background: url("../images/el-terapiyo.png") no-repeat center top;
+}
+.first-row{
+    margin-top: 82px;
 }
 .footer {
     margin-top: 12px;

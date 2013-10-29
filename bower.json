@@ -1,0 +1,22 @@
+{
+  "name": "terapiyo",
+  "version": "1.0.0",
+  "homepage": "https://github.com/CollDev/terapiyo",
+  "authors": [
+    "Joe Robles <joe.robles.pdj@gmail.com>"
+  ],
+  "description": "Página web de Terapiyo",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "latest",
+    "mustache": "latest"
+  }
+}

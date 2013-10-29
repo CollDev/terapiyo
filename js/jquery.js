@@ -1,1 +1,1 @@
-/home/joebuntu/NetBeansProjects/terapiyo/bower_components/jquery/jquery.min.js
+../bower_components/jquery/jquery.min.js

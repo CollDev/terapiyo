@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "jquery": "latest",
+    "bootstrap": "latest",
     "mustache": "latest"
   }
 }

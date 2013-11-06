@@ -3,11 +3,11 @@
     Author     : Joe Robles <joe.robles.pdj@gmail.com>
 */
 body {
-    font-family: "Metrophobic", Arial, serif;
+    font-family: "Archivo Narrow", Arial, serif;
     font-size: 16px;
 }
 .bold{
-    font-family: "Metrophobic", Arial, serif;font-weight: 700;
+    font-family: "Archivo Narrow", Arial, serif;font-weight: 700;
 }
 .background {
     background: url("../images/background.jpg") no-repeat;
@@ -17,7 +17,7 @@ body {
     background: url("../images/el-terapiyo.png") no-repeat center top;
 }
 .first-row{
-    margin-top: 82px;
+    margin-top: 70px;
 }
 .footer {
     margin-top: 12px;
@@ -27,13 +27,13 @@ body {
     margin-bottom: 62px;
 }
 .ca-menu li{
+    cursor: pointer;
     width: 117px;
     height: 117px;
     overflow: hidden;
     position: relative;
     float:left;
     list-style: none;
-    margin-left: 75px;
     -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
     -moz-box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
     box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
@@ -48,6 +48,7 @@ body {
 }
 .ca-menu li:last-child{
     margin-right: 0px;
+    margin-left: 75px;
 }
 .ca-menu li a{
     text-align: left;
@@ -140,13 +141,14 @@ body {
 #terapiyo-duende{
     display: block;
     height: 192px;
-    left: 79px;
+    left: 9px;
     position: absolute;
     top: 169px;
     width: 193px;
     z-index: 1;
 }
 .cat-menu li{
+    cursor: pointer;
     width: 193px;
     height: 192px;
     overflow: hidden;
@@ -233,9 +235,14 @@ body {
 .home{
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.18);
     border-radius: 44px;
-    font-size: 1.2em;
-    font-weight: 700;
+    font-size: 1.4em;
+    font-weight: bold;
     margin: 42px 0 12px;
-    padding: 45px 90px;
+    padding: 45px 90px 1px;
     text-align: justify;
+}
+.home p{
+    line-height: 1.25;
+    margin-bottom: 1.1em;
+    margin-top: 0;
 }

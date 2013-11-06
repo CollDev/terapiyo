@@ -1,4 +1,4 @@
-.yoga-adultos, .yoga, .volver, .teatro, .reiki, .pilates, .logotipo, .impro, .curso-el-terapiyo, .coaching, .cerrar, .brain-gym{
+.yoga-adultos, .yoga, .volver, .teatro, .reiki, .pilates, .logotipo, .impro, .curso-el-terapiyo, .coaching, .cerrar, .brain-gym, .twitter, .facebook{
     background: url("../img/sprites.png") no-repeat;
     display: block;
 }
@@ -73,4 +73,16 @@
     background-position: 0 -130px ;
     width: 117px;
     height: 117px;
+}
+
+.twitter{
+    background-position: -257px -138px ;
+    width: 28px;
+    height: 28px;
+}
+
+.facebook{
+    background-position: -288px -138px ;
+    width: 29px;
+    height: 28px;
 }

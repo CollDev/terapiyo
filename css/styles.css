@@ -246,3 +246,17 @@ body {
     margin-bottom: 1.1em;
     margin-top: 0;
 }
+div.footer div.container div.row > div {
+    padding: 50px 0;
+    text-align: justify;
+}
+div.news-footer {
+    background: #fff;
+    border-radius: 20px;
+    font-size: 12px;
+    padding: 20px;
+}
+div.footer div.container div.row > div > span {
+    font-size: 24px;
+    font-weight: bold;
+}

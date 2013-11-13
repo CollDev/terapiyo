@@ -1,0 +1,12 @@
+{
+    "title": "EL TERAPIYO",
+    "contents": [
+        { "content": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretiu." },
+        { "content": "Agnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesq1ue eu, pretiu. Agnis dis parturient montes, nascetur riduculus mus. Donec quam felis, ultricies nec, pellentresque eu, pretiu." }
+    ],
+    "horarios": [
+        { "horario": "Aenean - commodo - Aenean commodo" },
+        { "horario": "Aenean - commodo - Aenean commodo" },
+        { "horario": "Aenean - commodo - Aenean commodo" }
+    ]
+}

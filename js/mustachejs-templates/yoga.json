@@ -1,0 +1,19 @@
+{
+    "title": "YOGA",
+    "contents": [
+        { "content": "El practicar yoga es muy beneficioso tanto para el cuerpo como para la mente." },
+        { "content": "La práctica del Yoga enseña a tanto niños como adultos técnicas de respiración y relajación para hacer frente a las situaciones de tensión que se presentan en la escuela, en casa o con amigos promoviendo en todo momento la salud física, mental y una actitud positiva hacia el ejercicio." },
+        { "content": "Los niños que practican Yoga se convierten en personas seguras, sociables y con un excelente nivel de autoestima." },
+        { "content": "El yoga nos ayuda a relajarnos y a conocernos a nosotros mismos, nos ayuda a canalizar nuestra energía, sobre todo a niños muy inquietos, nos ayuda también a enfrentar canalizando nuestros miedos y ansiedades a demás de mejorar nuestro estado de animo" },
+        { "content": "El yoga mejora las conductas agresivas en los chicos por lo que resulta una muy buena práctica para mejorar el desempeño social." },
+        { "content": "Los ayuda a concentrarse lo que puede ser muy beneficioso para su proceso de aprendizaje." },
+        { "content": "Desde el punto de vista corporal, les da flexibilidad y elasticidad, los ayuda a desarrollar destrezas motoras y a estimular y activar distintos músculos, articulaciones, glándulas y órganos." },
+        { "content": "Las clases de yoga para niños incorporan la diversión y la creatividad en sus ejercicios. La flexibilidad y el conocimiento y descubrimiento de uno mismo. Los ejercicios de yoga para niños también incluyen concentración, relajación y técnicas de autocontrol. Estos promueven la fortaleza espiritual, la confianza y el respeto por uno mismo." }
+    ],
+    "horarios": [
+        { "horario": "Aenean - commodo - Aenean commodo" },
+        { "horario": "Aenean - commodo - Aenean commodo" },
+        { "horario": "Aenean - commodo - Aenean commodo" }
+    ],
+    "dirigida": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes."
+}

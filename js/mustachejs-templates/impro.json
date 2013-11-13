@@ -1,0 +1,12 @@
+{
+    "title": "IMPRO",
+    "contents": [
+        { "content": "La Impro es un deporte teatral en donde se busca crear historias y construir personajes en ese mismo momento y sin preparación alguna. Por medio de herramientas como la escucha y la aceptación todos los interesados pondrán a prueba todo su potencial usando su cuerpo y voz junto con el arma mas importante que contamos, la creatividad." }
+    ],
+    "horarios": [
+        { "horario": "Aenean - commodo - Aenean commodo" },
+        { "horario": "Aenean - commodo - Aenean commodo" },
+        { "horario": "Aenean - commodo - Aenean commodo" }
+    ],
+    "dirigida": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes."
+}

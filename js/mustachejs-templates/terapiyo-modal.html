@@ -1,0 +1,30 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="row">
+                <div class="cerrar pull-right" data-dismiss="modal"></div>
+                <div class="courses pull-right">
+                    <div class="reiki pull-right"></div>
+                    <div class="teatro pull-right"></div>
+                    <div class="yoga pull-right"></div>
+                    <div class="brain-gym pull-right"></div>
+                </div>
+                <div class="col-xs-12">
+                    <h1>{{ title }}</h1>
+                    {{ #contents }}
+                    <p>{{ content }}</p>
+                    {{ /contents }}
+                    <h3>HORARIOS:</h3>
+                    {{ #horarios }}
+                    <p>{{ horario }}</p>
+                    {{ /horarios }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <a class="volver pull-right" data-dismiss="modal"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

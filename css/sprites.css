@@ -1,18 +1,18 @@
-.yoga-adultos, .yoga, .volver, .teatro, .reiki, .pilates, .logotipo, .impro, .curso-el-terapiyo, .coaching, .cerrar, .brain-gym, .twitter, .facebook{
+.yoga-adultos, .yoga, .volver, .twitter, .teatro, .reiki, .pilates, .logotipo, .impro, .facebook, .curso-el-terapiyo, .coaching, .cerrar, .brain-gym {
     background: url("../img/sprites.png") no-repeat;
     display: block;
 }
 
 .yoga-adultos{
-    background-position: -316px -207px ;
-    width: 117px;
-    height: 117px;
+    background-position: -380px -246px ;
+    width: 119px;
+    height: 119px;
 }
 
 .yoga{
-    background-position: -2px -8px ;
-    width: 117px;
-    height: 117px;
+    background-position: -380px 0;
+    width: 119px;
+    height: 119px;
 }
 
 .volver{
@@ -21,22 +21,28 @@
     height: 32px;
 }
 
+.twitter{
+    background-position: -257px -138px ;
+    width: 28px;
+    height: 28px;
+}
+
 .teatro{
-    background-position: 0 -250px ;
-    width: 117px;
-    height: 117px;
+    background-position: 0 -123px ;
+    width: 119px;
+    height: 119px;
 }
 
 .reiki{
-    background-position: -382px 0;
-    width: 117px;
-    height: 117px;
+    background-position: 0 -246px ;
+    width: 119px;
+    height: 119px;
 }
 
 .pilates{
-    background-position: -124px 0;
-    width: 117px;
-    height: 117px;
+    background-position: 0 0;
+    width: 119px;
+    height: 119px;
 }
 
 .logotipo{
@@ -46,43 +52,37 @@
 }
 
 .impro{
-    background-position: -253px 0;
-    width: 117px;
-    height: 117px;
-}
-
-.curso-el-terapiyo{
-    background-position: -120px -174px ;
-    width: 193px;
-    height: 192px;
-}
-
-.coaching{
-    background-position: -320px -338px ;
-    width: 117px;
-    height: 117px;
-}
-
-.cerrar{
-    background-position: -128px -132px ;
-    width: 37px;
-    height: 38px;
-}
-
-.brain-gym{
-    background-position: 0 -130px ;
-    width: 117px;
-    height: 117px;
-}
-
-.twitter{
-    background-position: -257px -138px ;
-    width: 28px;
-    height: 28px;
+    background-position: -125px 0;
+    width: 119px;
+    height: 119px;
 }
 
 .facebook{
     background-position: -288px -138px ;
     width: 29px;
     height: 28px;
+}
+
+.curso-el-terapiyo{
+    background-position: -123px -173px ;
+    width: 193px;
+    height: 192px;
+}
+
+.coaching{
+    background-position: -251px 0;
+    width: 119px;
+    height: 119px;
+}
+
+.cerrar{
+    background-position: -128px -132px ;
+    width: 37px;
+    height: 37px;
+}
+
+.brain-gym{
+    background-position: -380px -123px ;
+    width: 119px;
+    height: 119px;
 }

@@ -28,8 +28,8 @@ body {
 }
 .ca-menu li{
     cursor: pointer;
-    width: 117px;
-    height: 117px;
+    width: 119px;
+    height: 119px;
     overflow: hidden;
     position: relative;
     float:left;
@@ -150,7 +150,7 @@ body {
 .cat-menu li{
     cursor: pointer;
     width: 193px;
-    height: 192px;
+    height: 193px;
     overflow: hidden;
     position: relative;
     float:left;

@@ -5,7 +5,7 @@
 $('span.ca-icon').on('click', function(e){
     e.preventDefault();
     var $this = this;
-    $.get("/js/mustachejs-templates/" + $($this).attr('class').substr(8) + ".json", function(data){
+    $.getJSON("/js/mustachejs-templates/" + $($this).attr('class').substr(8) + ".json", function(data){
         $.get("/js/mustachejs-templates/modal.html", function(modal){
             var $modal = $.mustache(modal, data);
             $('#terapiyoModal').html($modal).modal();
@@ -14,7 +14,7 @@ $('span.ca-icon').on('click', function(e){
 });
 $('span.cat-icon').on('click', function(e){
     e.preventDefault();
-    $.get("/js/mustachejs-templates/terapiyo.json", function(data){
+    $.getJSON("/js/mustachejs-templates/terapiyo.json", function(data){
         $.get("/js/mustachejs-templates/terapiyo-modal.html", function(modal){
             var $modal = $.mustache(modal, data);
             $('#terapiyoModal').html($modal).modal();
@@ -29,7 +29,7 @@ $('.contacto').on('click', function(e){
 });
 $('.noticias').on('click', function(e){
     e.preventDefault();
-    $.get("/js/mustachejs-templates/noticias.json", function(data){
+    $.getJSON("/js/mustachejs-templates/noticias.json", function(data){
         $.get("/js/mustachejs-templates/noticias-modal.html", function(modal){
             var $modal = $.mustache(modal, data);
             $('#terapiyoModal').html($modal).modal();

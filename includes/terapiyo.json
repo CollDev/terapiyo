@@ -7,7 +7,7 @@
     "courses": [
         {
             "course": [
-                { "course-title": "BRAIN GYM" },
+                { "course-title": "1.- BRAIN GYM" },
                 {
                     "course-detail": [
                         { "course-content": "Es un método práctico y dinámico que favorece el óptimo funcionamiento de los dos hemisferios y mejora la conexión entre cerebro y cuerpo a través del movimiento." },
@@ -23,7 +23,7 @@
         },
         {
             "course": [
-                { "course-title": "TEATRO" },
+                { "course-title": "2.- TEATRO" },
                 {
                     "course-detail": [
                         { "course-content": "En el teatro se juega a crear, inventar y aprender a participar en grupo. Las clases de teatro infantil son terapéuticas y socializadoras. Los trabajos en grupo, los ejercicios psicomotores y el contacto físico entre los compañeros, hace que nuestros niños se tornen mas tolerantes y receptivos. El teatro infantil no se trata de promocionar y crear actores, sino que debe ser visto como una experiencia que se adquiere a través del juego." },
@@ -35,7 +35,7 @@
         },
         {
             "course": [
-                { "course-title": "YOGA" },
+                { "course-title": "3.- YOGA" },
                 {
                     "course-detail": [
                         { "course-content": "El practicar yoga es muy beneficioso tanto para el cuerpo como para la mente." },
@@ -52,7 +52,7 @@
         },
         {
             "course": [
-                { "course-title": "REIKI" },
+                { "course-title": "4.- REIKI" },
                 {
                     "course-detail": [
                         { "course-content": "Reiki es una palabra japonesa que significa energía vital." },

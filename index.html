@@ -132,7 +132,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 home">
-                        <span class="contacto pull-right">CONTACTO</span>
+                        <a href="#myMapModal" class="btn contacto pull-right" data-toggle="modal">CONTACTO</a>
                         <h1 class="bold">INICIO</h1>
                         <p>
                             En un mundo distinto, donde lo burdo se impone sobre lo sublime, la intolerancia sobre la inteligencia, nace el CENTRO CULTURAL TERAPIYO, para hacer de nosotros mismos la creación, que rescatando nuestras energías positivas, muestre la destreza del pensamiento y el permitir a través del arte despertar ese corazón alegre, radiante, sensible. Divertirse con lo sano, motivar nuestras energías para el vuelo de nuestras fantasías, para que el descanso sea más fructífero y marche con la acción de nuestros propios movimientos. Donde la tecnología no supere la sensibilidad del hombre inteligente, física y mentalmente preparado para evitar el deterioro de nuestros buenos modales, o el distanciamiento con las personas que integran la sociedad donde nos desenvolvemos.
@@ -171,9 +171,61 @@
         <div class="copyright text-center">
             <p>Terapiyo&copy;Todos los Derechos Reservados. Creado por <a href="http://www.colldev.com/">CollDev</a> Alojado en <a href="http://www.royalhoster.com/">RoyalHoster</a></p>
         </div>
+        <div class="modal fade" id="myMapModal">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="cerrar pull-right" data-dismiss="modal"></div>
+                        <div class="col-xs-12">
+                            <div id="map-canvas"></div>
+                        </div>
+                        <div class="col-xs-12">
+                            <h1>CONTACTO</h1>
+                        </div>
+                        <div class="col-xs-5">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="nombres">NOMBRES:</label>
+                                    <input class="form-control" id="nombres" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">EMAIL:</label>
+                                    <input class="form-control" id="email" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <label for="telefono">TELEFONO:</label>
+                                    <input class="form-control" id="telefono" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <label for="telefono">CONSULTA:</label>
+                                    <textarea class="form-control" id="consulta" name="consulta"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-secondary">Enviar</button>
+                            </form>
+                        </div>
+                        <div class="col-xs-5 col-xs-offset-2">
+                            <h3>DIRECCIÓN:</h3>
+                            <p>Pasaje Tacna 150 Barranco</p>
+                            <p>Alt. cdra 2 de Saenz Peña</p>
+                            <h3>TELÉFONOS:</h3>
+                            <p><strong>Fijo:</strong> 051 235-8454 / 051 216-5169</p>
+                            <p><strong>Movil:</strong> 051 -45-854-265</p>
+                            <h3>EMAIL:</h3>
+                            <p>consulta@terapiyo.com.pe</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a class="volver pull-right" data-dismiss="modal"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="js/jquery.js"></script>
         <script src="lib/bootstrap/js/bootstrap.min.js"></script>
         <script src="js/jquery.mustache.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
         <script src="js/scripts.js"></script>
     </body>
 </html>

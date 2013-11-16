@@ -291,6 +291,17 @@ div.footer div.container div.row > div > span {
 .noticias {
     cursor: pointer;
 }
-.btn-secondary { color: #ffffff; background-color: #000; border-color: #777; }
-.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active, .open .dropdown-toggle.btn-secondary
-{ color: #ffffff; background-color: #888; border-color: #444; }
+.btn-secondary {
+    color: #ffffff;
+    background-color: #000;
+    border-color: #777;
+}
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active, .open .dropdown-toggle.btn-secondary {
+    color: #ffffff;
+    background-color: #888;
+    border-color: #444;
+}
+#map-canvas {
+    height: 300px;
+    width: 900px;
+}

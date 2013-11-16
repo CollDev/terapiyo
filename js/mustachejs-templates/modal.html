@@ -8,14 +8,17 @@
                     {{ #contents }}
                     <p>{{ content }}</p>
                     {{ /contents }}
-                    <h3>HORARIOS:</h3>
-                    {{ #horarios }}
-                    <p>{{ horario }}</p>
-                    {{ /horarios }}
+                    <p>&nbsp;</p>
+                    <p><strong>Informe de horarios al 256-7602</strong></p>
                 </div>
                 <div class="col-xs-6">
-                    <h3>DIRIGIDA A:</h3>
-                    <p>{{ dirigida }}</p>
+                    <h2>STAFF:</h2>
+                    {{ #staff }}
+                    <h3>{{ name }}</h3>
+                        {{ #teacher }}
+                        <p>{{ experience }}</p>
+                        {{ /teacher }}
+                    {{ /staff }}
                 </div>
             </div>
             <div class="row">

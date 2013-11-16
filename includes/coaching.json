@@ -1,0 +1,19 @@
+{
+    "title": "COACHING",
+    "contents": [
+        { "content": "Coaching de vida y coaching para mejorar en la organización, orden y aprendizaje." }
+    ],
+    "staff": [
+        { "name": "Yvonne Gómez-Restrepo:" },
+        {
+            "teacher": [
+                { "experience": "Terapeuta Integral y Complementaria." },
+                { "experience": "Entrenadora y terapeuta Brain Gym-Edu-K - USA (Gimnasia Mental-Kinesiología Educativa) con especialidad en niños y adolescentes." },
+                { "experience": "Terapeuta TREC (Terapia Racional Emotiva Conductual) Psicotrec-Perú- Catrec Argentina- Albert Ellis Institute - New York, con especialidad en niños, adolescentes y pacientes con desordenes alimenticios." },
+                { "experience": "Maestra de Reiki, Yoga y Meditación (Estudios en Perú, Colombia, Chile y Argentina) maestra de la Escuela Peruana de Reiki, miembro de la Asociación Latinoamericana de Yoga y del Centro Internacional de Osho." },
+                { "experience": "Autora del programa: Manual para padres Impacientes. Y Co-autora de Cartas Terapéuticas para niños." },
+                { "experience": "Con 15 años de experiencia como terapeuta integral, atendiendo niños con problemas de salud, hiperactividad, angustia, ansiedad, problemas de conducta, etc." }
+            ]
+        }
+    ]
+}

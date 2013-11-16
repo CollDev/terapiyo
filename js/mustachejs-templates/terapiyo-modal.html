@@ -11,13 +11,32 @@
                 </div>
                 <div class="col-xs-12">
                     <h1>{{ title }}</h1>
-                    {{ #contents }}
-                    <p>{{ content }}</p>
-                    {{ /contents }}
-                    <h3>HORARIOS:</h3>
-                    {{ #horarios }}
-                    <p>{{ horario }}</p>
-                    {{ /horarios }}
+                    <h2>{{ to }}</h2>
+                {{ #contents }}
+                    <h3>{{ content }}</h3>
+                {{ /contents }}
+                    <p>&nbsp;</p>
+                {{ #courses }}
+                    {{ #course }}
+                    <h4>{{ course-title }}</h4>
+                    {{ #course-detail }}
+                    <p>{{ course-content }}</p>
+                    {{ /course-detail }}
+                    {{ /course }}
+                    <p>&nbsp;</p>
+                {{ /courses }}
+                </div>
+                <div class="col-xs-12">
+                    <h2>STAFF:</h2>
+                    {{ #staffs }}
+                    {{ #staff }}
+                    <h3>{{ name }}</h3>
+                        {{ #teacher }}
+                        <p>{{ experience }}</p>
+                        {{ /teacher }}
+                    {{ /staff }}
+                    <p>&nbsp;</p>
+                    {{ /staffs }}
                 </div>
             </div>
             <div class="row">

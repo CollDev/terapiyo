@@ -1,0 +1,5 @@
+<?php
+$dbserver = 'localhost';
+$dbusername = 'root';//glamougt_spa
+$dbpassword = 'decenio97';//PpbXzMHcgBBC1hw8xf
+$database_name = 'glamougt_web';

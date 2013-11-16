@@ -286,7 +286,9 @@ div.footer div.container div.row > div > span {
     top: 40px
 }
 .contacto {
+    color: #333333;
     cursor: pointer;
+    font-size: 36px;
 }
 .noticias {
     cursor: pointer;

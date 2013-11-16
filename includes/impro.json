@@ -1,0 +1,36 @@
+{
+    "title": "IMPRO",
+    "contents": [
+        { "content": "La Impro es un deporte teatral en donde se busca crear historias y construir personajes en ese mismo momento y sin preparación alguna. Por medio de herramientas como la escucha y la aceptación todos los interesados pondrán a prueba todo su potencial usando su cuerpo y voz junto con el arma mas importante que contamos, la creatividad." }
+    ],
+    "staff": [
+        { "name": "Titi Plaza:" },
+        {
+            "teacher": [
+                { "experience": "Estudio Derecho y ciencias políticas en la universidad nacional Federico Villareal." },
+                { "experience": "Taller de formación actoral con Osvaldo cattone, tiene más de 15 años de experiencia como actriz en el Perú y extranjero." },
+                { "experience": "Actualmente dicta clases de teatro a niños y adolescentes y cuenta con una productora teatral hace más de 10 años." }
+            ]
+        },
+        { "name": "Gianni Chichizola:" },
+        {
+            "teacher": [
+                { "experience": "Estudio Ciencias de la Comunicación en la Universidad San Martín de Porres." },
+                { "experience": "Taller de formación actoral con Roberto Ángeles, Aristóteles Piccho, Fernando Petong y Joaquín Jordan." },
+                { "experience": "Tiene un programa en Radio Planeta 107.7: Universo Paralelo que tiene 6 años al aire." },
+                { "experience": "Es animador de eventos para empresas, Locutor comercial y actor. En la actualidad da clases de Expresión corporal y Teatro en el nido A Pasitos." },
+                { "experience": "Y está en la Obra Teatral El Proyecto Laramie" }
+            ]
+        },
+        { "name": "Flor de María Andrade:" },
+        {
+            "teacher": [
+                { "experience": "Cerca de 40 años de experiencia como actriz en Perú y en el extranjero." },
+                { "experience": "Se formó como actriz en las academias de Mario Rivera, Jorge Barrios Saavedra, entre otros." },
+                { "experience": "Llevo cursos de teatro en Estados Unidos." },
+                { "experience": "Contó con una academia de formación actoral por 10 años, enseño en diversos colegios y universidades." },
+                { "experience": "Profesora en la municipalidad de barranco de teatro enseñando a niños adolescentes y adultos." }
+            ]
+        }
+    ]
+}

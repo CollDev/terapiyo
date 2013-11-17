@@ -23,7 +23,10 @@ $('span.ter').on('click', function(e){
     });
 });
 $('.contacto').on('click', function(e){
-    initialize();
+    e.preventDefault();
+        $.get("/js/mustachejs-templates/contacto-modal.html", function(modal){
+            $('#terapiyoModal').html(modal).modal();
+    });
 });
 $('.noticias').on('click', function(e){
     e.preventDefault();

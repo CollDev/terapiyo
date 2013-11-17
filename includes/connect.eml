@@ -1,6 +1,0 @@
-<?php
-$emlusername   = 'contactos@glamourspa.pe';
-$emlpassword   = '!glamour321!';
-$emlserver     = 'datacenter.creatuhost.com';
-$port       = 465;
-$encryption = 'ssl';

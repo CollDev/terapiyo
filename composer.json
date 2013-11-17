@@ -1,0 +1,15 @@
+{
+    "name": "colldev/terapiyo",
+    "description": "Terapiyo web page",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joe Robles",
+            "email": "joe.robles.pdj@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+	"swiftmailer/swiftmailer": "5.1.*@dev"
+    }
+}

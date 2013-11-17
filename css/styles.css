@@ -250,10 +250,15 @@ div.footer div.container div.row > div {
     padding: 50px 0;
     text-align: justify;
 }
+.fb-like-box, .twitter-timeline{
+    border-radius: 20px;
+    background: #fff;
+}
 div.news-footer {
     background: #fff;
     border-radius: 20px;
     font-size: 12px;
+    height: 250px;
     padding: 20px;
 }
 div.footer div.container div.row > div > span {
@@ -305,5 +310,17 @@ div.footer div.container div.row > div > span {
 }
 #map-canvas {
     height: 300px;
-    width: 900px;
+    width: 100%;
+}
+#contact input, #contact textarea {
+    background: #646363;
+}
+.fb-like-box {
+    width: 100% !important;
+}
+.fb-like-box > span{
+    width: 100% !important;
+}
+.fb-like-box span iframe{
+    width: 100% !important;
 }

@@ -18,7 +18,7 @@
                     <p>&nbsp;</p>
                 {{ #courses }}
                     {{ #course }}
-                    <h4>{{ course-title }}</h4>
+                    <h4><strong>{{ course-title }}</strong></h4>
                     {{ #course-detail }}
                     <p>{{ course-content }}</p>
                     {{ /course-detail }}
@@ -30,7 +30,7 @@
                     <h2>STAFF:</h2>
                     {{ #staffs }}
                     {{ #staff }}
-                    <h3>{{ name }}</h3>
+                    <h3><strong>{{ name }}</strong></h3>
                         {{ #teacher }}
                         <p>{{ experience }}</p>
                         {{ /teacher }}

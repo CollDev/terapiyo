@@ -1,6 +1,6 @@
 <?php
 require_once 'connect.eml';
-require_once '../lib/SwiftMailer/swift_required.php';
+require_once '../vendor/swiftmailer/swiftmailer/lib/swift_required.php';
 $transport = Swift_SmtpTransport::newInstance()
     ->setUsername($emlusername)
     ->setPassword($emlpassword)

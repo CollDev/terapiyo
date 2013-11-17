@@ -1,3 +1,8 @@
 nbproject
 bower_components
 bower_components.zip
+vendor
+vendor.zip
+includes/connect.db
+includes/connect.eml
+composer.phar

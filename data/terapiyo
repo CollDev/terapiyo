@@ -1,0 +1,32 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.6deb1
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tiempo de generación: 16-11-2013 a las 22:39:25
+-- Versión del servidor: 5.5.34-0ubuntu0.13.10.1
+-- Versión de PHP: 5.5.3-1ubuntu2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de datos: `terapiyo`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `correos`
+--
+
+CREATE TABLE IF NOT EXISTS `correos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) NOT NULL,
+  `telefono` int(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `consulta` text NOT NULL,
+  `creado` datetime NOT NULL,
+  `estado` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;

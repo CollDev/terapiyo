@@ -1,0 +1,7 @@
+database:
+    driver: pdo_mysql
+    host: localhost
+    dbname: 
+    user: root
+    password: 
+    charset: utf8

@@ -42,7 +42,7 @@ Que tenga un buen dia.');
                 $sent = $mailer->send($message);
                 //guardar en la base de datos
                 require_once 'db.php';
-                $query = "INSERT INTO `correos` (
+                $query = "INSERT INTO `correo` (
                             `id`,
                             `nombre`,
                             `telefono`,

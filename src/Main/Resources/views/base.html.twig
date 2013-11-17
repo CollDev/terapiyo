@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>{% block title %}Terapiyo Admin{% endblock %}</title>
+        {% block stylesheets -%}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="../css/styles.css" rel="stylesheet" type="text/css">
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <!--[if lt IE 9]>
+        <div style=' clear: both; text-align:center; position: relative;'>
+            <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+                <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+            </a>
+        </div>
+    <![endif]-->
+    </head>
+
+    <body>
+        {% block body %}
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="{{ path('index') }}">Terapiyo</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Menú<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">My data <span class="right-caret"></span></a>
+                                <ul class="dropdown-menu sub-menu">
+                                    <li><a href="#">Upload photogel</a></li>
+                                    <li><a href="#">Extract matrix</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">My matrixes</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+            {% block content %}{% endblock %}
+        {% endblock %}
+        {% block javascripts %}
+        <script src="../js/jquery.js"></script>
+        <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../js/jquery.mustache.js"></script>
+        <script src="../js/inline-message.js"></script>
+        <script src="../js/scripts.js"></script>
+        {% endblock %}
+    </body>
+</html>

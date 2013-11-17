@@ -6,3 +6,4 @@ vendor.zip
 includes/connect.db
 includes/connect.eml
 composer.phar
+app/config/parameters.yml

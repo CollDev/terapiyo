@@ -20,6 +20,7 @@
 
     <body>
         {% block body %}
+        <div id="terapiyoModal" class="modal fade"></div>
         <nav class="navbar navbar-inverse" role="navigation">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -36,12 +37,13 @@
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Menú<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#">My data <span class="right-caret"></span></a>
+                                <a href="#">Noticias <span class="right-caret"></span></a>
                                 <ul class="dropdown-menu sub-menu">
-                                    <li><a href="#">Upload photogel</a></li>
-                                    <li><a href="#">Extract matrix</a></li>
+                                    <li><a href="">Activas</a></li>
+                                    <li><a href="">Borrador</a></li>
+                                    <li><a href="">Papelera</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">My matrixes</a></li>
+                                    <li><a href="">Historial</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -49,14 +51,18 @@
                 </ul>
             </div>
         </nav>
+        <div class="wrapper">
+            <div class="container">
             {% block content %}{% endblock %}
+            </div>
+        </div>
         {% endblock %}
         {% block javascripts %}
         <script src="../js/jquery.js"></script>
         <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
         <script src="../js/jquery.mustache.js"></script>
         <script src="../js/inline-message.js"></script>
-        <script src="../js/scripts.js"></script>
+        <script src="../js/admin.js"></script>
         {% endblock %}
     </body>
 </html>

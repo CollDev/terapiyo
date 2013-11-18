@@ -3,50 +3,81 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 //Routing
+// GET / Home
 $app->get('/', function() use($app) {
     $response = $app['twig']->render('templates/index.html.twig');
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('index');
 
-// GET  /{resource}/    List
-$app->get('/api/{resource}/', function ($resource) use ($app) {
-    $res = array();
-    $q = mysql_query("SELECT * FROM $resource");
-    while ($c = mysql_fetch_assoc($q)) { $res[] = $c; }
-    return new Response(json_encode($res), 200, array('Content-Type' => 'application/json'));
-});
+// GET /api List
+$app->get('/api/', function() use($app) {
+    $sql = "SELECT * FROM `noticia` WHERE `estado` = '1' AND `inicio` < NOW() AND NOW() < `fin`;";
+    $statement = $app['db']->prepare($sql);
+    $statement->execute();
+    $noticias = $statement->fetchAll();
+    return new Response(json_encode($noticias), 200, array('Content-Type' => 'application/json'));
+})->bind('list');
 
-// GET  /{resource}/{id}    Show
-$app->get('/api/{resource}/{id}/', function ($resource, $id) use ($app) {
-    $res = array();
-    $q = mysql_query("SELECT * FROM $resource WHERE id = '$id'");
-    while ($c = mysql_fetch_assoc($q)) { $res[] = $c; }
-    return new Response(json_encode($res), 200, array('Content-Type' => 'application/json'));
-});
+// GET /api/{id} Show
+$app->get('/api/{id}/', function($id) use ($app) {
+    $sql = "SELECT * FROM `noticia` WHERE `id` = ?;";
+    $noticia = $app['db']->fetchAssoc($sql, array((int) $id));
+    return new Response(json_encode($noticia), 200, array('Content-Type' => 'application/json'));
+})->bind('show');
 
-// POST     /{resource}     Create
-$app->post('/api/{resource}/', function ($resource, Request $request) use ($app) {
+// POST /api Create
+$app->post('/api/', function(Request $request) use ($app) {
     parse_str($request->getContent(), $data);
-    $query = "INSERT INTO $resource (" . implode(', ', array_keys($data)) . ") VALUES ('" . implode("', '", $data) . "')";
-    mysql_query($query);
-    return new Response(mysql_affected_rows(), 200);
-});
+    $sql = "INSERT INTO `noticia` (" . implode(', ', array_keys($data)) . ") VALUES ('" . implode("', '", $data) . "');";
+    $affected_rows = $app['db']->executeUpdate($sql);
+    return new Response($affected_rows, 200);
+})->bind('create');
 
-// PUT  /{resource}/{id}    Update
-$app->put('/api/{resource}/{id}/', function ($resource, $id, Request $request) use ($app) {
+// PUT /api/{id} Update
+$app->put('/api/{id}/', function($id, Request $request) use ($app) {
     parse_str($request->getContent(), $data);
     $data_mod = array();
-    foreach ($data as $key => $value) { $data_mod[] = "$key = '$value'"; }
-    $query = "UPDATE $resource SET " . implode(', ', $data_mod) . " WHERE id = $id";
-    mysql_query($query);
-    return new Response(mysql_affected_rows(), 200);
-});
+    foreach ($data as $key => $value) {
+        $data_mod[] = "`$key` = '$value'";
+    }
+    $sql = "UPDATE `noticia` SET " . implode(', ', $data_mod) . " WHERE `id` = ?;";
+    $affected_rows = $app['db']->executeUpdate($sql, array((int) $id));
+    return new Response($affected_rows, 200);
+})->bind('update');
 
-// DELETE   /{resource}/{id}    Destroy
-$app->delete('/api/{resource}/{id}/', function ($resource, $id) use ($app) {
-    $q = mysql_query("DELETE FROM $resource WHERE id = '$id'");
-    return new Response(mysql_affected_rows(), 200);
-});
+// DELETE /api/{id} Delete
+$app->delete('/api/{id}/', function($id) use ($app) {
+    $sql = "DELETE FROM `noticia` WHERE `id` = ?;";
+    $affected_rows = $app['db']->executeUpdate($sql, array((int) $id));
+    return new Response($affected_rows, 200);
+})->bind('delete');
+
+// GET /api/borrador List
+$app->get('/api/borrador', function() use($app) {
+    $sql = "SELECT * FROM `noticia` WHERE `estado` = '0';";
+    $statement = $app['db']->prepare($sql);
+    $statement->execute();
+    $noticias = $statement->fetchAll();
+    return new Response(json_encode($noticias), 200, array('Content-Type' => 'application/json'));
+})->bind('borrador');
+
+// GET /api/historial List
+$app->get('/api/historial', function() use($app) {
+    $sql = "SELECT * FROM `noticia` WHERE `fin` < NOW();";
+    $statement = $app['db']->prepare($sql);
+    $statement->execute();
+    $noticias = $statement->fetchAll();
+    return new Response(json_encode($noticias), 200, array('Content-Type' => 'application/json'));
+})->bind('historial');
+// GET /api/papelera List
+$app->get('/api/papelera', function() use($app) {
+    $sql = "SELECT * FROM `noticia` WHERE `estado` = '2';";
+    $statement = $app['db']->prepare($sql);
+    $statement->execute();
+    $noticias = $statement->fetchAll();
+    return new Response(json_encode($noticias), 200, array('Content-Type' => 'application/json'));
+})->bind('papelera');
+
 //end Routing
 
 if (!$app['debug']) {

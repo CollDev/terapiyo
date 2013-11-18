@@ -22,7 +22,7 @@ $app->register(new Cache(), array(
 
 //Doctrine
 $app->register(new Doctrine(), array(
-    'db.options' => $app['doctrine.parameters'],
+    'db.options' => $app['doctrine.parameters']['database'],
 ));
 //end Doctrine
 

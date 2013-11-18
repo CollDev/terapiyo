@@ -33,7 +33,7 @@ $('.contacto').on('click', function(e){
             $('#terapiyoModal').html(modal).modal();
     });
 });
-$('.news-footer p').on('click', function(e){
+$(document).on('click', '.news-footer p', function(e){
     e.preventDefault();
     $.getJSON('/admin/api/', function(data){
         var noticia = {
@@ -104,5 +104,24 @@ $(document).on('click', ".btn-secondary", function(e) {
             $('a.volver').trigger('click');
         }
         $('#flash_message').html('<strong id="flash_title"></strong>&nbsp;&nbsp;').append(data.response).message(type, title, '#flash_title', top);
+    });
+});
+$(document).on('ready', function(){
+    $.getJSON('/admin/api/', function(data){
+        var noticias = {
+            noticia: data
+        };
+        $.get("/js/mustachejs-templates/noticias-scroll.html", function(modal){
+            var $scroll = '<tr><td colspan="5"><h2>No hay noticias aún</h2></td></tr>';
+            if (data != '') {
+                $scroll = $.mustache(modal, noticias);
+            }
+            $('.news-footer').html($scroll);
+            $('.scroll-pane').jScrollPane({
+                verticalDragMaxHeight: 56,
+                verticalDragMinHeight: 56,
+                showArrows: false
+            });
+        });
     });
 });

@@ -52,6 +52,9 @@
             </div>
         </nav>
         <div class="wrapper">
+            <div id="flash_message" class="alert hidden">
+                <strong id="flash_title"></strong>
+            </div>
             <div class="container">
             {% block content %}{% endblock %}
             </div>
@@ -61,6 +64,7 @@
         <script src="../js/jquery.js"></script>
         <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
         <script src="../js/jquery.mustache.js"></script>
+        <script src="../js/jquery.plugins.js"></script>
         <script src="../js/inline-message.js"></script>
         <script src="../js/admin.js"></script>
         {% endblock %}

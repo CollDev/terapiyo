@@ -28,9 +28,9 @@ $app->get('/api/{id}/', function($id) use ($app) {
 // POST /api Create
 $app->post('/api/', function(Request $request) use ($app) {
     parse_str($request->getContent(), $data);
-    $sql = "INSERT INTO `noticia` (" . implode(', ', array_keys($data)) . ") VALUES ('" . implode("', '", $data) . "');";
+    $sql = "INSERT INTO `noticia` (`creado`, " . implode(', ', array_keys($data)) . ") VALUES (NOW(), '" . implode("', '", $data) . "');";
     $affected_rows = $app['db']->executeUpdate($sql);
-    return new Response($affected_rows, 200);
+    return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
 })->bind('create');
 
 // PUT /api/{id} Update
@@ -42,14 +42,14 @@ $app->put('/api/{id}/', function($id, Request $request) use ($app) {
     }
     $sql = "UPDATE `noticia` SET " . implode(', ', $data_mod) . " WHERE `id` = ?;";
     $affected_rows = $app['db']->executeUpdate($sql, array((int) $id));
-    return new Response($affected_rows, 200);
+    return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
 })->bind('update');
 
 // DELETE /api/{id} Delete
 $app->delete('/api/{id}/', function($id) use ($app) {
     $sql = "DELETE FROM `noticia` WHERE `id` = ?;";
     $affected_rows = $app['db']->executeUpdate($sql, array((int) $id));
-    return new Response($affected_rows, 200);
+    return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
 })->bind('delete');
 
 // GET /api/borrador List

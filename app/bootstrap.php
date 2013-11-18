@@ -5,6 +5,7 @@ use Silex\Provider\UrlGeneratorServiceProvider as Url;
 use Silex\Provider\HttpCacheServiceProvider as Cache;
 use Silex\Provider\DoctrineServiceProvider as Doctrine;
 use Symfony\Component\Yaml\Parser as Parser;
+use Symfony\Component\HttpFoundation\Request;
 
 $app['debug'] = true;
 $app['locale'] = 'es';
@@ -36,3 +37,5 @@ $app->register(new Twig(), array(
 //Routing
 $app->register(new Url());
 //end Routing
+
+Request::enableHttpMethodParameterOverride();

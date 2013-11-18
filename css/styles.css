@@ -387,3 +387,7 @@ div.footer div.container div.row > div > span {
     color: #fff;
     text-decoration: none;
 }
+#twitter-widget-0 {
+    margin: 0 10px;
+    max-width: 95% !important;
+}

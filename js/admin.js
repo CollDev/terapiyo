@@ -31,7 +31,7 @@ $(document).on('ready', function(){
         inicio = $("form#new-news input#inicio"),
         fin = $("form#new-news #fin"),
         estado = $("form#new-news #estado"),
-        datetimeRegex = /^((((19|20)([2468][048]|[13579][26]|0[48])|2000)-02-29|((19|20)[0-9]{2}-(0[469]|11)-(0[1-9]|[12][0-9]|30)|(19|20)[0-9]{2}-(0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01])|(19|20)[0-9]{2}-02-(0[1-9]|1[0-9]|2[0-8])))\s([01][0-9]|2[0-3]):([012345][0-9]):([012345][0-9]))$/,
+        datetimeRegex = /^([2][0]\d{2}\/([0]\d|[1][0-2])\/([0-2]\d|[3][0-1]))$|^([2][0]\d{2}\/([0]\d|[1][0-2])\/([0-2]\d|[3][0-1])\s([0-1]\d|[2][0-3])\:[0-5]\d\:[0-5]\d)$/,
         integerRegex = /^\d+$/;
 
         if (titulo.val() == "") {
@@ -94,7 +94,7 @@ $(document).on('ready', function(){
         inicio = $("form#edit-news input#inicio"),
         fin = $("form#edit-news #fin"),
         estado = $("form#edit-news #estado"),
-        datetimeRegex = /^((((19|20)([2468][048]|[13579][26]|0[48])|2000)-02-29|((19|20)[0-9]{2}-(0[469]|11)-(0[1-9]|[12][0-9]|30)|(19|20)[0-9]{2}-(0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01])|(19|20)[0-9]{2}-02-(0[1-9]|1[0-9]|2[0-8])))\s([01][0-9]|2[0-3]):([012345][0-9]):([012345][0-9]))$/,
+        datetimeRegex = /^([2][0]\d{2}\/([0]\d|[1][0-2])\/([0-2]\d|[3][0-1]))$|^([2][0]\d{2}\/([0]\d|[1][0-2])\/([0-2]\d|[3][0-1])\s([0-1]\d|[2][0-3])\:[0-5]\d\:[0-5]\d)$/,
         integerRegex = /^\d+$/;
 
         if (titulo.val() == "") {
@@ -148,6 +148,21 @@ $(document).on('ready', function(){
                 $('button.close').trigger('click');
             }
             $('#flash_message').html('<strong id="flash_title"></strong>&nbsp;&nbsp;').append(message).message(type, title, '#flash_title', top);
+        });
+    });
+    $(document).on('mouseover', '.datetimepicker', function() {
+        $('.datetimepicker').datetimepicker({
+            language: 'es'
+        });
+        $(function () {
+            $('#inicio-div').datetimepicker();
+            $('#fin-div').datetimepicker();
+            $("#inicio-div").on("change.dp",function (e) {
+                $('#fin-div').data("DateTimePicker").setStartDate(e.date);
+            });
+            $("#fin-div").on("change.dp",function (e) {
+                $('#inicio-div').data("DateTimePicker").setEndDate(e.date);
+            });
         });
     });
 });

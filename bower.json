@@ -18,6 +18,7 @@
   "dependencies": {
     "jquery": "latest",
     "bootstrap": "latest",
-    "mustache": "latest"
+    "mustache": "latest",
+    "bootstrap3-datetimepicker": "latest"
   }
 }

@@ -391,3 +391,9 @@ div.footer div.container div.row > div > span {
     margin: 0 10px;
     max-width: 95% !important;
 }
+.datetimepicker {
+    cursor: pointer;
+}
+.datepicker {
+    z-index: 1151 !important;
+}

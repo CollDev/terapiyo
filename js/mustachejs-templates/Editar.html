@@ -20,20 +20,29 @@
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="inicio">Inicio</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" id="inicio" name="inicio" type="text" value="{{ inicio }}">
+                    <div class="col-sm-10 input-group datetimepicker" id="inicio-div">
+                        <input class="form-control" id="inicio" name="inicio" type="datetime" data-format="YYYY/MM/DD HH:mm:ss" value="{{ inicio }}">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="fin">Fin</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" id="fin" name="fin" type="text" value="{{ fin }}">
+                    <div class="col-sm-10 input-group datetimepicker" id="fin-div">
+                        <input class="form-control" id="fin" name="fin" type="datetime" data-format="YYYY/MM/DD HH:mm:ss" value="{{ fin }}">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="estado">Estado</label>
                     <div class="col-sm-10">
-                        <input class="form-control" id="estado" name="estado" type="text" value="{{ estado }}">
+                        <select class="form-control" id="estado" name="estado" data-selected="{{ estado }}">
+                            <option value="1">Activo</option>
+                            <option value="0">Borrador</option>
+                        </select>
                     </div>
                 </div>
                 <input id="_method" name="_method" type="hidden" value="PUT">

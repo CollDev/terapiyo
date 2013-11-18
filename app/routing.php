@@ -11,19 +11,19 @@ $app->get('/', function() use($app) {
 
 // GET /api List
 $app->get('/api/', function() use($app) {
-    $sql = "SELECT * FROM `noticia` WHERE `estado` = '1' AND `inicio` < NOW() AND NOW() < `fin`;";
+    $sql = "SELECT * FROM `noticia` WHERE `estado` = '1' AND `inicio` < NOW() AND NOW() < `fin` ORDER BY `id` DESC;";
     $statement = $app['db']->prepare($sql);
     $statement->execute();
     $noticias = $statement->fetchAll();
     return new Response(json_encode($noticias), 200, array('Content-Type' => 'application/json'));
-})->bind('list');
+});
 
 // GET /api/{id} Show
 $app->get('/api/{id}/', function($id) use ($app) {
     $sql = "SELECT * FROM `noticia` WHERE `id` = ?;";
     $noticia = $app['db']->fetchAssoc($sql, array((int) $id));
     return new Response(json_encode($noticia), 200, array('Content-Type' => 'application/json'));
-})->bind('show');
+});
 
 // POST /api Create
 $app->post('/api/', function(Request $request) use ($app) {
@@ -38,19 +38,28 @@ $app->put('/api/{id}/', function($id, Request $request) use ($app) {
     parse_str($request->getContent(), $data);
     $data_mod = array();
     foreach ($data as $key => $value) {
-        $data_mod[] = "`$key` = '$value'";
+        if ($key != '_method') {
+            $data_mod[] = "`$key` = '$value'";
+        }
     }
     $sql = "UPDATE `noticia` SET " . implode(', ', $data_mod) . " WHERE `id` = ?;";
     $affected_rows = $app['db']->executeUpdate($sql, array((int) $id));
     return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
-})->bind('update');
+});
 
 // DELETE /api/{id} Delete
 $app->delete('/api/{id}/', function($id) use ($app) {
     $sql = "DELETE FROM `noticia` WHERE `id` = ?;";
     $affected_rows = $app['db']->executeUpdate($sql, array((int) $id));
     return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
-})->bind('delete');
+});
+
+// PATCH /api/{id} Delete
+$app->post('/api/{id}/', function($id) use ($app) {
+    $sql = "UPDATE `noticia` SET `estado` = '2' WHERE `id` = ?;";
+    $affected_rows = $app['db']->executeUpdate($sql, array((int) $id));
+    return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
+});
 
 // GET /api/borrador List
 $app->get('/api/borrador', function() use($app) {
@@ -59,7 +68,7 @@ $app->get('/api/borrador', function() use($app) {
     $statement->execute();
     $noticias = $statement->fetchAll();
     return new Response(json_encode($noticias), 200, array('Content-Type' => 'application/json'));
-})->bind('borrador');
+});
 
 // GET /api/historial List
 $app->get('/api/historial', function() use($app) {
@@ -68,7 +77,7 @@ $app->get('/api/historial', function() use($app) {
     $statement->execute();
     $noticias = $statement->fetchAll();
     return new Response(json_encode($noticias), 200, array('Content-Type' => 'application/json'));
-})->bind('historial');
+});
 // GET /api/papelera List
 $app->get('/api/papelera', function() use($app) {
     $sql = "SELECT * FROM `noticia` WHERE `estado` = '2';";
@@ -76,7 +85,7 @@ $app->get('/api/papelera', function() use($app) {
     $statement->execute();
     $noticias = $statement->fetchAll();
     return new Response(json_encode($noticias), 200, array('Content-Type' => 'application/json'));
-})->bind('papelera');
+});
 
 //end Routing
 

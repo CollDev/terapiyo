@@ -12,6 +12,12 @@
                 { "experience": "Estudio Psicología en la Universidad Peruana Unión (Perú) y continuo su formación en la Universidad Nacional de Educación a distancia (España), formación en Lima yoga, Akro Estudio, Ki'ntu, formación en la Universidad Internacional de la Rioja (España), y talleres de actualización y cuidado de la columna tanto en España, Italia y Portugal." },
                 { "experience": "Experiencia laboral en Scene (escuela de artes escénicas), Sport Life, World Gym, Casa del Adulto Mayor, Gimnasia Laboral en el Banco de la Nación, y el Scotiabank, Cadena del Gol's Gym y en el Club Lima Golf" }
             ]
+        },
+        { "name": "Susana Husarová:" },
+        {
+            "teacher": [
+                { "experience": "Instructora de Yoga formada por Escuela de Yoga en la Republica Checa, cuenta con trayectoria por los países europeos, los Estados Unidos y actualmente en Latinoamérica. Su formación se desarrolla también en el campo de las artes, las danzas folclóricas y el estudio del piano clásico." }
+            ]
         }
     ]
 }

@@ -33,11 +33,17 @@ $('.contacto').on('click', function(e){
             $('#terapiyoModal').html(modal).modal();
     });
 });
-$('.noticias').on('click', function(e){
+$('.news-footer p').on('click', function(e){
     e.preventDefault();
-    $.getJSON("/includes/noticias.json", function(data){
+    $.getJSON('/admin/api/', function(data){
+        var noticia = {
+            noticias: data
+        };
         $.get("/js/mustachejs-templates/noticias-modal.html", function(modal){
-            var $modal = $.mustache(modal, data);
+            var $modal = '<tr><td colspan="5"><h2>No hay noticias aún</h2></td></tr>';
+            if (data != '') {
+                $modal = $.mustache(modal, noticia);
+            }
             $('#terapiyoModal').html($modal).modal();
         });
     });

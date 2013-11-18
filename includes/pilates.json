@@ -4,5 +4,13 @@
         { "content": "Pilates hace que la mente, el cuerpo y el espíritu trabajen como uno. Mediante la respiración y la concentración se logra un estado de relajación. De nuestro centro o Powerhouse es de donde parte toda la fuerza para realizar los movimientos corporales." },
         { "content": "Pilates exige a uno mismo un gran control corporal, mucha precisión y corrección de la postura a demás una gran consciencia de nuestro cuerpo." },
         { "content": "La concentración, siendo la mente la que guía todo el movimiento, y la correcta respiración que nos ayuda a llevarlo a cabo." }
+    ],
+    "staff": [
+        { "name": "María del Carmen Aicardi:" },
+        {
+            "teacher": [
+                { "experience": "Con más de 10 años de experiencia en este arte, su taller va dirigido a adultos y adultos mayores." }
+            ]
+        }
     ]
 }

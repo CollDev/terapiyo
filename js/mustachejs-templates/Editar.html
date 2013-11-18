@@ -5,6 +5,9 @@
             <h4 class="modal-title">Editar Noticia</h4>
         </div>
         <div class="modal-body">
+            <div id="flash_message" class="alert hidden">
+                <strong id="flash_title"></strong>
+            </div>
             <form id="edit-news" class="form-horizontal" action="/admin/api/{{ id }}/" role="form">
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="titulo">Titulo</label>

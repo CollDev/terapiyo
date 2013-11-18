@@ -19,6 +19,7 @@
     "jquery": "latest",
     "bootstrap": "latest",
     "mustache": "latest",
-    "bootstrap3-datetimepicker": "latest"
+    "bootstrap3-datetimepicker": "latest",
+    "jscrollpane": "latest"
   }
 }

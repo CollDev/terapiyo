@@ -1,4 +1,4 @@
-.yoga-adultos, .yoga, .volver, .twitter, .terapiyo, .teatro, .reiki, .pilates, .logotipo, .impro, .facebook, .curso-el-terapiyo, .coaching, .cerrar, .brain-gym {
+.yoga-adultos, .yoga, .volver, .twitter, .terapiyo, .teatro, .reiki, .pilates, .lucas, .lotito, .logotipo, .impro, .facebook, .estrella, .curso-el-terapiyo, .coaching, .cerrar, .camilo, .brain-gym {
     background: url("../img/sprites.png") no-repeat;
     display: block;
 }
@@ -10,7 +10,7 @@
 }
 
 .yoga {
-    background-position: -374px 0;
+    background-position: -375px 0;
     width: 119px;
     height: 119px;
 }
@@ -40,13 +40,25 @@
 }
 
 .reiki {
-    background-position: 0 -247px ;
+    background-position: 0 -246px ;
     width: 119px;
     height: 119px;
 }
 
 .pilates {
-    background-position: 0 0;
+    background-position: 0 -1px ;
+    width: 119px;
+    height: 119px;
+}
+
+.lucas {
+    background-position: -517px -220px ;
+    width: 119px;
+    height: 119px;
+}
+
+.lotito {
+    background-position: -640px 0;
     width: 119px;
     height: 119px;
 }
@@ -69,6 +81,11 @@
     height: 28px;
 }
 
+.estrella {
+    background-position: -642px -250px ;
+    width: 119px;
+    height: 119px;
+}
 .curso-el-terapiyo {
     background-position: -123px -173px ;
     width: 193px;
@@ -87,8 +104,14 @@
     height: 37px;
 }
 
+.camilo {
+    background-position: -640px -123px ;
+    width: 119px;
+    height: 119px;
+}
+
 .brain-gym {
-    background-position: -373px -124px ;
+    background-position: -374px -123px ;
     width: 119px;
     height: 119px;
 }

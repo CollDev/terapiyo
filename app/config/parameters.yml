@@ -1,7 +1,0 @@
-database:
-    driver: pdo_mysql
-    host: localhost
-    dbname: terapiyo
-    user: root
-    password: decenio97
-    charset: utf8

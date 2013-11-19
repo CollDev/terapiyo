@@ -406,3 +406,12 @@ div.footer div.container div.row > div > span {
     right: 10px;
     background: rgba(0, 0, 0, 0);
 }
+.terapiyo {
+    display: block;
+    left: 61px;
+    position: relative;
+    top: -20px;
+}
+.after-terapiyo {
+    margin-top: 0 !important;
+}

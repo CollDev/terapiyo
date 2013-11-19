@@ -122,6 +122,18 @@ $(document).on('ready', function(){
                 verticalDragMinHeight: 56,
                 showArrows: false
             });
+            $(document).on('click', '.jspPane a', function(e){
+                e.preventDefault();
+                $.getJSON($(this).attr('href'), function(data){
+                    $.get("/js/mustachejs-templates/noticia-modal.html", function(modal){
+                        var $modal = '<tr><td colspan="5"><h2>Error en noticia</h2></td></tr>';
+                        if (data != '') {
+                            $modal = $.mustache(modal, data);
+                        }
+                        $('#terapiyoModal').html($modal).modal();
+                    });
+                });
+            });
         });
     });
 });

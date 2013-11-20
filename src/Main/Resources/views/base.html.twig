@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Terapiyo{% block title %}{% endblock %}</title>
         {% block stylesheets -%}
-        <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="/css/layout.css" rel="stylesheet" type="text/css">
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <!--[if lt IE 9]>
@@ -22,11 +23,12 @@
             {% block content %}{% endblock %}
         {% endblock %}
         {% block javascripts %}
-        <script src="js/jquery.min.js"></script>
-        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/jquery.mustache.js"></script>
-        <script src="js/jquery.plugins.js"></script>
-        <script src="js/inline-message.js"></script>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/js/jquery.mustache.js"></script>
+        <script src="/js/jquery.plugins.js"></script>
+        <script src="/js/inline-message.js"></script>
+        <script src="/js/common.js"></script>
         {% endblock %}
     </body>
 </html>

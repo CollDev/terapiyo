@@ -4,19 +4,25 @@ use Silex\Provider\TwigServiceProvider as Twig;
 use Silex\Provider\UrlGeneratorServiceProvider as Url;
 use Silex\Provider\HttpCacheServiceProvider as Cache;
 use Silex\Provider\DoctrineServiceProvider as Doctrine;
+use Silex\Provider\SwiftmailerServiceProvider as Swiftmailer;
 use Symfony\Component\Yaml\Parser as Parser;
 use Symfony\Component\HttpFoundation\Request;
-use Silex\Provider\SwiftmailerServiceProvider as Swiftmailer;
 
 $app['debug'] = true;
 $app['locale'] = 'es';
 
-//Parameters
 $yaml = new Parser();
-$file_contents = $yaml->parse(file_get_contents(__DIR__ . '/config/parameters.yml'));
-$app['doctrine.parameters'] = $file_contents;
-$app['swiftmailer.options'] = $file_contents;
+
+//Parameters
+$parameters = $yaml->parse(file_get_contents(__DIR__ . '/config/parameters.yml'));
+$app['doctrine.parameters'] = $parameters;
+$app['swiftmailer.options'] = $parameters['mailer'];
 //end Parameters
+
+//Settings
+$app['settings'] = $yaml->parse(file_get_contents(__DIR__ . '/config/settings.yml'));
+//end Settings
+
 //Cache
 $app->register(new Cache(), array(
     'http_cache.cache_dir' => __DIR__ . '/cache/',
@@ -30,7 +36,9 @@ $app->register(new Doctrine(), array(
 //end Doctrine
 
 //Swiftmailer
-$app->register(new Swiftmailer());
+$app->register(new Swiftmailer(), array(
+    'swiftmailer.options' => $app['swiftmailer.options'],
+));
 //end Swiftmailer
 
 //Twig
@@ -44,4 +52,5 @@ $app->register(new Twig(), array(
 $app->register(new Url());
 //end Routing
 
+// _method hidden input enabled
 Request::enableHttpMethodParameterOverride();

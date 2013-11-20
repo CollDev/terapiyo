@@ -1,0 +1,12 @@
+{{ #noticia }}
+<tr>
+    <td>{{ id }}</td>
+    <td>{{ titulo }}</td>
+    <td>{{ creado }}</td>
+    <td>{{ actualizado }}</td>
+    <td>
+        <a class="btn btn-warning btn-xs entity" href="/api/{{ id }}/" rel="tooltip" title="Recuperar"><span class="glyphicon glyphicon-refresh"></span></a>
+        <a class="btn btn-danger btn-xs entity" href="/api/{{ id }}/" rel="tooltip" title="Purgar"><span class="glyphicon glyphicon-remove"></span></a>
+    </td>
+</tr>
+{{ /noticia }}

@@ -1,0 +1,10 @@
+/* 
+    Created on : 20/11/2013, 09:32:14 AM
+    Author     : Joe Robles <joe.robles.pdj@gmail.com>
+*/
+.datetimepicker {
+    cursor: pointer;
+}
+.datepicker {
+    z-index: 1151 !important;
+}

@@ -9,34 +9,112 @@ $app->get('/', function() use($app) {
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('index');
 
-// GET / Admin
+// GET /admin Admin
 $app->get('/admin', function() use($app) {
     $response = $app['twig']->render('templates/admin.html.twig');
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('admin');
 
+// GET /admin Admin
+$app->get('/admin/borrador', function() use($app) {
+    $response = $app['twig']->render('templates/borrador.html.twig');
+    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
+})->bind('borrador');
+
+// GET /admin Admin
+$app->get('/admin/papelera', function() use($app) {
+    $response = $app['twig']->render('templates/papelera.html.twig');
+    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
+})->bind('papelera');
+
+// GET /admin Admin
+$app->get('/admin/historial', function() use($app) {
+    $response = $app['twig']->render('templates/historial.html.twig');
+    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
+})->bind('historial');
+
+// GET /consultas Consultas
+$app->get('/admin/consultas', function() use($app) {
+    $response = $app['twig']->render('templates/consultas.html.twig');
+    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
+})->bind('consultas');
+
+// GET /programadas Programadas
+$app->get('/admin/programadas', function() use($app) {
+    $response = $app['twig']->render('templates/programadas.html.twig');
+    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
+})->bind('programadas');
+
+
 // POST /feedback
-$app->post('/feedback', function () use ($app) {
-    $request = $app['request'];
+$app->post('/feedback', function(Request $request) use($app) {
+    parse_str($request->getContent(), $data);
+    if ($data['nombre'] != '' && $data['email'] != '' && $data['consulta'] != '') {
+        $nombre = $data['nombre'];
+        $email = $data['email'];
+        $consulta = $data['consulta'];
+        $telefono  = $data['telefono'] != '' ? $data['telefono'] : NULL;
 
-    $message = \Swift_Message::newInstance()
-        ->setSubject('Mensaje desde la página web')
-        ->setFrom($request->get('email'))
-        ->setTo($request->get('email'))
-        ->setBcc($app['swiftmailer.options']['username'])
-        ->setBody('Hola:' . '
-' . '
-Nombre: ' . $request->get('nombre') . '
-Telefono: ' . $request->get('telefono') . '
-Email: ' . $request->get('email') . '
-Escribió la siguiente consulta:' . '
-' . $request->get('message') . '
-' . '
-Que tenga un buen dia.');
+        if ($nombre != '' && $email != '' && $consulta != '') {
+            $nameRegex    = '/^[a-zA-Z]+(([\'\,\.\- ][a-zA-Z ])?[a-zA-Z]*)*$/';
+            $phoneRegex   = '/[0-9-()+]{3,20}/';
+            $emailRegex   = '/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/';
+            if (preg_match($nameRegex, $nombre) == 0) {
+                $return = array('responseCode' => 400, 'response' => 'Ha ingresado un nombre no válido.');
+            } elseif (preg_match($emailRegex, $email) == 0) {
+                $return = array('responseCode' => 400, 'response' => 'Ha ingresado un email no válido.');
+            } elseif ($telefono != null && preg_match($phoneRegex, $telefono) == 0) {
+                $return = array('responseCode' => 400, 'response' => 'Ha ingresado un teléfono no válido.');
+            } else {
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Mensaje desde la página web')
+                    ->setFrom($email)
+                    ->setTo($email)
+                    ->setBcc($app['swiftmailer.options']['username'])
+                    ->setBody(
+'<html>' .
+' <head></head>' .
+' <body>Hola:' .
+'' .
+'Nombre: ' . $nombre .
+'Telefono: ' . $telefono .
+'Email: ' . $email .
+'Escribió la siguiente consulta:' .
+$consulta .
+'' .
+'Que tenga un buen dia.' .
+' </body>' .
+'</html>', 'text/html');
 
-    $app['mailer']->send($message);
-
-    return new Response('Thank you for your feedback!', 201);
+                $sent = $app['mailer']->send($message);
+                
+                //guardar en la base de datos
+                $sql = "INSERT INTO `correo` (`creado`, `estado`, " . implode(', ', array_keys($data)) . ") VALUES (NOW(), '1', '" . implode("', '", $data) . "');";
+                $inserted = $app['db']->executeUpdate($sql);
+                
+                if ($sent && $inserted) {
+                    $return = array('responseCode' => 200, 'response' => 'Consulta enviada y almacenada.');
+                } else if ($sent) {
+                    $return = array('responseCode' => 200, 'response' => 'Consulta enviada.');
+                } else if ($inserted) {
+                    $return = array('responseCode' => 200, 'response' => 'Consulta almacenada.');
+                } else {
+                    $return = array('responseCode' => 400, 'response' => 'No se pudo enviar, intente más tarde.');
+                }
+            }
+        } else {
+            if ($nombre == '') {
+                $return = array('responseCode' => 400, 'response' => 'Debe ingresar su nombre.');
+            } elseif ($email == '') {
+                $return = array('responseCode' => 400, 'response' => 'Debe ingresar su correo electrónico.');
+            } elseif ($consulta == '') {
+                $return = array('responseCode' => 400, 'response' => 'Debe ingresar una consulta.');
+            }
+        }
+    } else {
+        $return = array('responseCode' => 400, 'response' => 'Debe usar el formulario de contácto de la página web.');
+    }
+    return new Response(json_encode($return), 200, array('Content-Type' => 'application/json'));
 })->bind('feedback');
 
 // GET /api List
@@ -91,6 +169,13 @@ $app->post('/api/{id}/', function($id) use ($app) {
     return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
 });
 
+// PATCH /api/recuperar/{id} Delete
+$app->post('/api/recuperar/{id}/', function($id) use ($app) {
+    $sql = "UPDATE `noticia` SET `estado` = '1' WHERE `id` = ?;";
+    $affected_rows = $app['db']->executeUpdate($sql, array((int) $id));
+    return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
+});
+
 // GET /api/borrador List
 $app->get('/api/borrador', function() use($app) {
     $sql = "SELECT * FROM `noticia` WHERE `estado` = '0';";
@@ -117,6 +202,23 @@ $app->get('/api/papelera', function() use($app) {
     return new Response(json_encode($noticias), 200, array('Content-Type' => 'application/json'));
 });
 
+// GET /api/consulta List
+$app->get('/api/consultas', function() use($app) {
+    $sql = "SELECT * FROM `correo` WHERE `estado` = '1' ORDER BY `id` DESC;";
+    $statement = $app['db']->prepare($sql);
+    $statement->execute();
+    $consultas = $statement->fetchAll();
+    return new Response(json_encode($consultas), 200, array('Content-Type' => 'application/json'));
+});
+
+// GET /api/programadas List
+$app->get('/api/programadas', function() use($app) {
+    $sql = "SELECT * FROM `noticia` WHERE `inicio` > NOW() ORDER BY `id` DESC;";
+    $statement = $app['db']->prepare($sql);
+    $statement->execute();
+    $consultas = $statement->fetchAll();
+    return new Response(json_encode($consultas), 200, array('Content-Type' => 'application/json'));
+});
 //end Routing
 
 if (!$app['debug']) {

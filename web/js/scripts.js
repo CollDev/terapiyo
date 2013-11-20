@@ -2,11 +2,7 @@
     Created on : 24/10/2013, 12:54:09 PM
     Author     : Joe Robles <joe.robles.pdj@gmail.com>
 */
-// preload the arrow //
-if(document.images) {
-  arrow = new Image(7,80); 
-  arrow.src = "../images/msg_arrow.gif"; 
-}
+
 $('span.adul').on('click', function(e){
     e.preventDefault();
     var $this = this;

@@ -3,55 +3,141 @@
 {% block title %} Administracion{% endblock %}
 {% block stylesheets -%}
         {{ parent() }}
-        <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
+<link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block content -%}
-        <div id="terapiyoModal" class="modal fade"></div>
-        <nav class="navbar navbar-inverse" role="navigation">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="{{ path('index') }}">Terapiyo</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Menú<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#">Noticias <span class="right-caret"></span></a>
-                                <ul class="dropdown-menu sub-menu">
-                                    <li><a href="">Activas</a></li>
-                                    <li><a href="">Borrador</a></li>
-                                    <li><a href="">Papelera</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="">Historial</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
+<div id="terapiyoModal" class="modal fade"></div>
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ path('admin') }}">Terapiyo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Noticias<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('admin') }}">Activas</a></li>
+                    <li><a href="{{ path('borrador') }}">Borrador</a></li>
+                    <li><a href="{{ path('papelera') }}">Papelera</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{{ path('programadas') }}">Programadas</a></li>
+                    <li><a href="{{ path('historial') }}">Historial</a></li>
                 </ul>
-            </div>
-        </nav>
-        <div class="wrapper">
-            <div id="flash_message" class="alert hidden">
-                <strong id="flash_title"></strong>
-            </div>
-            <div class="container">
+            </li>
+            <li><a href="{{ path('consultas') }}">Consultas</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="wrapper">
+    <div id="flash_message" class="alert hidden">
+        <strong id="flash_title"></strong>
+    </div>
+    <div class="container">
     {% block container %}{% endblock %}
-            </div>
-        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-        <script src="js/moment.js"></script>
-        <script src="js/bootstrap-datetimepicker.min.js"></script>
-        <script src="js/bootstrap-datetimepicker.es.js"></script>
-        <script src="js/admin.js"></script>
+<script src="/js/moment.js"></script>
+<script src="/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/js/bootstrap-datetimepicker.es.js"></script>
+<script src="/js/admin.js"></script>
+<script>
+    $(document).on('ready', function(){
+        {% if app.request.getRequestUri == '/admin' %}
+            $.getJSON('/api/', function(data){
+                var noticias = {
+                    noticia: data
+                };
+                $.get('/js/mustachejs-templates/noticias-list.html', function(template){
+                    var list = '<tr><td colspan="5"><h2>No hay noticias aún</h2></td></tr>';
+                    if (data != '') {
+                        list = $.mustache(template, noticias);
+                    }
+                    $('tbody.news-list').html(list);
+                    $("[rel='tooltip']").tooltip();
+                });
+            });
+        {% elseif app.request.getRequestUri == '/admin/consultas' %}
+            $.getJSON('/api/consultas', function(data){
+                var consultas = {
+                    consulta: data
+                };
+                $.get('/js/mustachejs-templates/consultas-list.html', function(template){
+                    var list = '<tr><td colspan="8"><h2>No hay consultas aún</h2></td></tr>';
+                    if (data != '') {
+                        list = $.mustache(template, consultas);
+                    }
+                    $('tbody.comments-list').html(list);
+                    $("[rel='tooltip']").tooltip();
+                });
+            });
+        {% elseif app.request.getRequestUri == '/admin/borrador' %}
+            $.getJSON('/api/borrador', function(data){
+                var noticias = {
+                    noticia: data
+                };
+                $.get('/js/mustachejs-templates/noticias-list.html', function(template){
+                    var list = '<tr><td colspan="8"><h2>No hay borradores aún</h2></td></tr>';
+                    if (data != '') {
+                        list = $.mustache(template, noticias);
+                    }
+                    $('tbody.draft-list').html(list);
+                    $("[rel='tooltip']").tooltip();
+                });
+            });
+        {% elseif app.request.getRequestUri == '/admin/papelera' %}
+            $.getJSON('/api/papelera', function(data){
+                var noticias = {
+                    noticia: data
+                };
+                $.get('/js/mustachejs-templates/papelera-list.html', function(template){
+                    var list = '<tr><td colspan="8"><h2>No hay noticias eliminadas aún</h2></td></tr>';
+                    if (data != '') {
+                        list = $.mustache(template, noticias);
+                    }
+                    $('tbody.recycle-list').html(list);
+                    $("[rel='tooltip']").tooltip();
+                });
+            });
+        {% elseif app.request.getRequestUri == '/admin/historial' %}
+            $.getJSON('/api/historial', function(data){
+                var noticias = {
+                    noticia: data
+                };
+                $.get('/js/mustachejs-templates/noticias-list.html', function(template){
+                    var list = '<tr><td colspan="8"><h2>No hay historial aún</h2></td></tr>';
+                    if (data != '') {
+                        list = $.mustache(template, noticias);
+                    }
+                    $('tbody.history-list').html(list);
+                    $("[rel='tooltip']").tooltip();
+                });
+            });
+        {% elseif app.request.getRequestUri == '/admin/programadas' %}
+            $.getJSON('/api/programadas', function(data){
+                var noticias = {
+                    noticia: data
+                };
+                $.get('/js/mustachejs-templates/noticias-list.html', function(template){
+                    var list = '<tr><td colspan="8"><h2>No hay noticias programadas aún</h2></td></tr>';
+                    if (data != '') {
+                        list = $.mustache(template, noticias);
+                    }
+                    $('tbody.scheduled-list').html(list);
+                    $("[rel='tooltip']").tooltip();
+                });
+            });
+        {% endif %}
+    });
+</script>
 {% endblock %}

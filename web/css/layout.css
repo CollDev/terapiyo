@@ -1,0 +1,27 @@
+/* 
+    Created on : 20/11/2013, 09:34:41 AM
+    Author     : Joe Robles <joe.robles.pdj@gmail.com>
+*/
+.white{
+    color: #fff;
+}
+#msg {
+    background: url("../images/msg_arrow.gif") left center no-repeat;
+    display: none;
+    padding-left: 7px;
+    position: absolute;
+    z-index: 99997;
+}
+#msgcontent {
+    background: #f3e6e6;
+    border: 2px solid #924949;
+    border-left: none;
+    color: #000;
+    display: block;
+    padding: 5px;
+    max-width: 250px;
+    min-width: 150px;
+}
+#flash_message {
+    z-index: 99999;
+}

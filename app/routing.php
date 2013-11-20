@@ -15,6 +15,30 @@ $app->get('/admin', function() use($app) {
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('admin');
 
+// POST /feedback
+$app->post('/feedback', function () use ($app) {
+    $request = $app['request'];
+
+    $message = \Swift_Message::newInstance()
+        ->setSubject('Mensaje desde la página web')
+        ->setFrom($request->get('email'))
+        ->setTo($request->get('email'))
+        ->setBcc($app['swiftmailer.options']['username'])
+        ->setBody('Hola:' . '
+' . '
+Nombre: ' . $request->get('nombre') . '
+Telefono: ' . $request->get('telefono') . '
+Email: ' . $request->get('email') . '
+Escribió la siguiente consulta:' . '
+' . $request->get('message') . '
+' . '
+Que tenga un buen dia.');
+
+    $app['mailer']->send($message);
+
+    return new Response('Thank you for your feedback!', 201);
+})->bind('feedback');
+
 // GET /api List
 $app->get('/api/', function() use($app) {
     $sql = "SELECT * FROM `noticia` WHERE `estado` = '1' AND `inicio` < NOW() AND NOW() < `fin` ORDER BY `id` DESC;";

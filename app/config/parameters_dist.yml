@@ -1,7 +1,19 @@
 database:
-    driver: pdo_mysql
-    host: localhost
-    dbname: 
-    user: root
-    password: 
-    charset: utf8
+    driver:     pdo_mysql
+    host:       localhost
+    port:       ~
+    dbname:     
+    user:       root
+    password:   ~
+    charset:    utf8
+
+mailer:
+    host:       127.0.0.1
+    username:   
+    password:   
+    port:       465
+    encryption: ssl
+    auth_mode:  smtp
+
+locale:         en
+secret:         ThisTokenIsNotSoSecretChangeIt

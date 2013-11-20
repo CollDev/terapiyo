@@ -10,7 +10,59 @@
 {% endblock %}
 
 {% block content -%}
+        <div id="terapiyoModal" class="modal fade"></div>
+        <div class="background">
+            <div class="container el-terapiyo">
+                <div id="flash_message" class="alert hidden">
+                    <strong id="flash_title"></strong>
+                </div>
+                <div class="row first-row">
+                    <div class="col-sm-6"><a href="/"><i class="logotipo"></i></a></div>
+                    <div class="col-sm-6 ">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a href="https://twitter.com/elterapiyo" target="_blank"><i class="twitter pull-right"></i></a>
+                                <a href="https://www.facebook.com/elterapiyo" target="_blank"><i class="facebook pull-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <address class="pull-right text-right white">
+                                    <strong>Dirección:</strong> Pasaje Tacna 150 Barranco<br>
+                                    Alt. cdra 2 de Saenz Peña<br>
+                                    <strong>Teléfono:</strong> 256-7602<br>
+                                    <strong>Movil:</strong> 946-551-532<br>
+                                    <strong>E-mail:</strong> informes@terapiyo.com<br>
+                                </address>
+                            </div>
+                        </div>
+                    </div>
+                </div>
     {% block container %}{% endblock %}
+            </div>
+        </div>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span>Facebook</span>
+                        <div class="fb-like-box" data-href="https://www.facebook.com/elterapiyo" data-height="250" data-width="100%" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
+                    </div>
+                    <div class="col-sm-4 twitter-footer">
+                        <span>Twitter</span>
+                        <a class="twitter-timeline" href="https://twitter.com/elterapiyo" data-widget-id="401804192626405376"></a>
+                    </div>
+                    <div class="col-sm-4">
+                        <span>Noticias</span>
+                        <div class="news-footer scroll-pane"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright text-center">
+            <p>Terapiyo&copy;Todos los Derechos Reservados. Creado por <a href="http://www.colldev.com/">CollDev</a> Alojado en <a href="http://www.royalhoster.com/">RoyalHoster</a></p>
+        </div>
+        <div id="fb-root"></div>
 {% endblock %}
 
 {% block javascripts %}

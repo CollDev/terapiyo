@@ -415,3 +415,8 @@ div.footer div.container div.row > div > span {
 .after-terapiyo {
     margin-top: 0 !important;
 }
+.error {
+    font-weight: bold;
+    min-height: 20em;
+    padding:15em 0 3em;
+}

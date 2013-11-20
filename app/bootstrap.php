@@ -6,15 +6,17 @@ use Silex\Provider\HttpCacheServiceProvider as Cache;
 use Silex\Provider\DoctrineServiceProvider as Doctrine;
 use Symfony\Component\Yaml\Parser as Parser;
 use Symfony\Component\HttpFoundation\Request;
+use Silex\Provider\SwiftmailerServiceProvider as Swiftmailer;
 
-$app['debug'] = false;
+$app['debug'] = true;
 $app['locale'] = 'es';
 
 //Parameters
 $yaml = new Parser();
-$app['doctrine.parameters'] = $yaml->parse(file_get_contents(__DIR__ . '/config/parameters.yml'));
+$file_contents = $yaml->parse(file_get_contents(__DIR__ . '/config/parameters.yml'));
+$app['doctrine.parameters'] = $file_contents;
+$app['swiftmailer.options'] = $file_contents;
 //end Parameters
-
 //Cache
 $app->register(new Cache(), array(
     'http_cache.cache_dir' => __DIR__ . '/cache/',
@@ -26,6 +28,10 @@ $app->register(new Doctrine(), array(
     'db.options' => $app['doctrine.parameters']['database'],
 ));
 //end Doctrine
+
+//Swiftmailer
+$app->register(new Swiftmailer());
+//end Swiftmailer
 
 //Twig
 $app->register(new Twig(), array(

@@ -1,6 +1,6 @@
 $("[rel='tooltip']").tooltip();
 $(document).on('ready', function(){
-    $.getJSON('/admin/api/', function(data){
+    $.getJSON('/api/', function(data){
         var noticias = {
             noticia: data
         };

@@ -9,6 +9,12 @@ $app->get('/', function() use($app) {
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('index');
 
+// GET / Admin
+$app->get('/admin', function() use($app) {
+    $response = $app['twig']->render('templates/admin.html.twig');
+    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
+})->bind('admin');
+
 // GET /api List
 $app->get('/api/', function() use($app) {
     $sql = "SELECT * FROM `noticia` WHERE `estado` = '1' AND `inicio` < NOW() AND NOW() < `fin` ORDER BY `id` DESC;";

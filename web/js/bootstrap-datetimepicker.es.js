@@ -1,0 +1,1 @@
+../../bower_components/bootstrap3-datetimepicker/src/js/locales/bootstrap-datetimepicker.es.js

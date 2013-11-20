@@ -33,21 +33,6 @@ $('.contacto').on('click', function(e){
             $('#terapiyoModal').html(modal).modal();
     });
 });
-$(document).on('click', '.news-footer p', function(e){
-    e.preventDefault();
-    $.getJSON('/admin/api/', function(data){
-        var noticia = {
-            noticias: data
-        };
-        $.get("/js/mustachejs-templates/noticias-modal.html", function(modal){
-            var $modal = '<tr><td colspan="5"><h2>No hay noticias aún</h2></td></tr>';
-            if (data != '') {
-                $modal = $.mustache(modal, noticia);
-            }
-            $('#terapiyoModal').html($modal).modal();
-        });
-    });
-});
 $(document).on('click', ".btn-secondary", function(e) {
     e.preventDefault();
     var nombre       = $("form#contact input#nombre"),
@@ -107,7 +92,7 @@ $(document).on('click', ".btn-secondary", function(e) {
     });
 });
 $(document).on('ready', function(){
-    $.getJSON('/admin/api/', function(data){
+    $.getJSON('/api/', function(data){
         var noticias = {
             noticia: data
         };
@@ -122,17 +107,37 @@ $(document).on('ready', function(){
                 verticalDragMinHeight: 56,
                 showArrows: false
             });
-            $(document).on('click', '.jspPane a', function(e){
-                e.preventDefault();
-                $.getJSON($(this).attr('href'), function(data){
-                    $.get("/js/mustachejs-templates/noticia-modal.html", function(modal){
-                        var $modal = '<tr><td colspan="5"><h2>Error en noticia</h2></td></tr>';
-                        if (data != '') {
-                            $modal = $.mustache(modal, data);
-                        }
-                        $('#terapiyoModal').html($modal).modal();
+            $(document).on('click', '.news-footer', function(e){
+                var target = $(e.target);
+                target.attr('href');
+                if (target.attr('class') === 'jspDrag jspHover') {
+                    return false;
+                }
+                if (typeof target.attr('href') === "undefined") {
+                    $.getJSON('/api/', function(data){
+                        var noticia = {
+                            noticias: data
+                        };
+                        $.get("/js/mustachejs-templates/noticias-modal.html", function(modal){
+                            var $modal = '<tr><td colspan="5"><h2>No hay noticias aún</h2></td></tr>';
+                            if (data != '') {
+                                $modal = $.mustache(modal, noticia);
+                            }
+                            $('#terapiyoModal').html($modal).modal();
+                        });
                     });
-                });
+                } else {
+                    e.preventDefault();
+                    $.getJSON(target.attr('href'), function(data){
+                        $.get("/js/mustachejs-templates/noticia-modal.html", function(modal){
+                            var $modal = '<tr><td colspan="5"><h2>Error en noticia</h2></td></tr>';
+                            if (data != '') {
+                                $modal = $.mustache(modal, data);
+                            }
+                            $('#terapiyoModal').html($modal).modal();
+                        });
+                    });
+                }
             });
         });
     });

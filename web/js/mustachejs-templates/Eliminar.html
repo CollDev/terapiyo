@@ -2,54 +2,48 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Nueva Noticia</h4>
+            <h4 class="modal-title">¿Desea eliminar esta Noticia?</h4>
         </div>
         <div class="modal-body">
-            <form id="new-news" class="form-horizontal" action="/admin/api/" role="form">
+            <div id="flash_message" class="alert hidden">
+                <strong id="flash_title"></strong>
+            </div>
+            <form action="/api/{{ id }}/" class="form-horizontal" id="delete-news" role="form">
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="titulo">Titulo</label>
                     <div class="col-sm-10">
-                        <input class="form-control" id="titulo" name="titulo" type="text">
+                        <p class="form-control-static">{{ titulo }}</p>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="contenido">Contenido</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" id="contenido" name="contenido"></textarea>
+                        <p class="form-control-static">{{ contenido }}</p>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="inicio">Inicio</label>
-                    <div class="col-sm-10 input-group datetimepicker" id="inicio-div">
-                        <input class="form-control" id="inicio" name="inicio" type="datetime" data-format="YYYY/MM/DD HH:mm:ss">
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">{{ inicio }}</p>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="fin">Fin</label>
-                    <div class="col-sm-10 input-group datetimepicker" id="fin-div">
-                        <input class="form-control" id="fin" name="fin" type="datetime" data-format="YYYY/MM/DD HH:mm:ss">
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">{{ fin }}</p>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="estado">Estado</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="estado" name="estado">
-                            <option value="1">Activo</option>
-                            <option value="0">Borrador</option>
-                        </select>
+                        <p class="form-control-static">{{ estado }}</p>
                     </div>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-danger crear-noticia">Crear</button>
+            <button type="button" class="btn btn-danger eliminar-noticia">Eliminar</button>
         </div>
     </div>
 </div>

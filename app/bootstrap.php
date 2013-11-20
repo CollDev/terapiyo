@@ -7,7 +7,7 @@ use Silex\Provider\DoctrineServiceProvider as Doctrine;
 use Symfony\Component\Yaml\Parser as Parser;
 use Symfony\Component\HttpFoundation\Request;
 
-$app['debug'] = true;
+$app['debug'] = false;
 $app['locale'] = 'es';
 
 //Parameters

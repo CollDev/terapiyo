@@ -67,24 +67,11 @@ $app->post('/feedback', function(Request $request) use($app) {
                 $return = array('responseCode' => 400, 'response' => 'Ha ingresado un teléfono no válido.');
             } else {
                 $message = \Swift_Message::newInstance()
-                    ->setSubject('Mensaje desde la página web')
+                    ->setSubject($app['settings']['mailer']['subject'])
                     ->setFrom($email)
-                    ->setTo($email)
-                    ->setBcc($app['swiftmailer.options']['username'])
-                    ->setBody(
-'<html>' .
-' <head></head>' .
-' <body>Hola:' .
-'' .
-'Nombre: ' . $nombre .
-'Telefono: ' . $telefono .
-'Email: ' . $email .
-'Escribió la siguiente consulta:' .
-$consulta .
-'' .
-'Que tenga un buen dia.' .
-' </body>' .
-'</html>', 'text/html');
+                    ->setTo($app['swiftmailer.options']['username'])
+                    ->setBcc($email)
+                    ->setBody(sprintf($app['settings']['mailer']['body'], $nombre, $email, $telefono, $consulta), 'text/html');
 
                 $sent = $app['mailer']->send($message);
                 

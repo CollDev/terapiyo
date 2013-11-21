@@ -7,3 +7,6 @@ if(document.images) {
   arrow = new Image(7,80); 
   arrow.src = "../images/msg_arrow.gif"; 
 }
+$('a').on('click', function(){
+    $(this).blur();
+});

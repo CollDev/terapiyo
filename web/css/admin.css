@@ -8,3 +8,10 @@
 .datepicker {
     z-index: 1151 !important;
 }
+.tiny-search {
+    text-align: left;
+    width: 50% !important;
+}
+.pagination, .pager {
+    margin: 0;
+}

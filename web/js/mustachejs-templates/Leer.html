@@ -1,0 +1,53 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Detalle de consulta</h4>
+        </div>
+        <div class="modal-body">
+            <form action="/answer" class="form-horizontal" id="answer-comment" role="form">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="titulo">Nombre</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">{{ nombre }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="contenido">Telefono</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">{{ telefono }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="inicio">Email</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">{{ email }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="fin">Enviado</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">{{ creado }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="fin">Consulta</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">{{ consulta }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="fin">Respuesta</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" id="respuesta" name="respuesta"></textarea>
+                    </div>
+                </div>
+                <input id="email" name="email" type="hidden" value="{{ id }}">
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-success responder-consulta">Responder</button>
+        </div>
+    </div>
+</div>

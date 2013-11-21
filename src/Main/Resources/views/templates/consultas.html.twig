@@ -2,19 +2,72 @@
 
 {% block container %}
                 <h1>Consultas</h1>
+                <div class="search row">
+                    <div class="input-group col-xs-12 col-sm-12 col-md-6">
+                        <select class="form-control input-group-addon tiny-search" id="columns"></select>
+                        <input class="form-control tiny-search" type="text" id="query" placeholder="Ingrese su búsqueda" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group col-xs-12 col-sm-6 col-md-3">
+                        <select class="form-control" id="results-per-page">
+                            <option value="5">5</option>
+                            <option value="10" selected>10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        <span class="input-group-addon">Resultados por página</span>
+                    </div>
+                    <div class="input-group col-xs-12 col-sm-6 col-md-3">
+                        <span class="input-group-addon">Página</span>
+                        <select class="form-control" id="pagedropdown"></select>
+                        <span class="input-group-addon"><span style="display:none" id="currentpage"></span> de <span id="totalpages"></span></span>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <ul class="pager">
+                            <li><a href="#" style="white-space:nowrap;">Consultas del <span id="startrecord"></span> al <span id="endrecord"></span> de <span id="totalrecords"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+                        <ul class="pagination">
+                            <li class="disabled"><a class="first-page" href="#"><<</a></li>
+                            <li class="disabled"><a class="prev-page" href="#"><</a></li>
+                            <li><a class="next-page" href="#">></a></li>
+                            <li><a class="last-page" href="#">>></a></li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-condensed">
+                    <table class="table table-bordered table-striped table-condensed table-hover tinytable" id="table">
                         <thead>
                             <tr>
-                                <th>Nº</th>
-                                <th>Nombre</th>
-                                <th>Teléfono</th>
-                                <th>Email</th>
-                                <th>Creado</th>
-                                <!--<th>Acciones</th>-->
+                                <th class="nosort"><span>Nº</span></th>
+                                <th><span>Nombre</span></th>
+                                <th><span>Teléfono</span></th>
+                                <th><span>Email</span></th>
+                                <th><span>Creado</span></th>
+                                <th class="nosort"><span>Acciones</span></th>
                             </tr>
                         </thead>
-                        <tbody class="comments-list"></tbody>
+                        <tbody>
+                            {% for consulta in consultas %}
+                            <tr>
+                                <td>{{ consulta.id }}</td>
+                                <td>{{ consulta.nombre }}</td>
+                                <td>{{ consulta.telefono }}</td>
+                                <td>{{ consulta.email }}</td>
+                                <td>{{ consulta.creado }}</td>
+                                <td>
+                                    {% if consulta.estado == '0' %}
+                                    <a class="btn btn-primary btn-xs entity" href="/api/consulta/{{ consulta.id }}/" rel="tooltip" title="Leer"><span class="glyphicon glyphicon-book"></span></a>
+                                    {% elseif consulta.estado == '1' %}
+                                    <a class="btn btn-success btn-xs entity" href="/api/consulta/{{ consulta.id }}/" rel="tooltip" title="Responder"><span class="glyphicon glyphicon-send"></span></a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
                     </table>
                 </div>
 {% endblock %}

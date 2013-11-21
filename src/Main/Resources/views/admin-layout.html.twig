@@ -4,6 +4,7 @@
 {% block stylesheets -%}
         {{ parent() }}
 <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
+<link href="/css/admin.css" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block content -%}
@@ -50,93 +51,42 @@
 <script src="/js/moment.js"></script>
 <script src="/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/js/bootstrap-datetimepicker.es.js"></script>
+<script src="/js/tinyTableV3.js"></script>
 <script src="/js/admin.js"></script>
 <script>
     $(document).on('ready', function(){
-        {% if app.request.getRequestUri == '/admin' %}
-            $.getJSON('/api/', function(data){
-                var noticias = {
-                    noticia: data
-                };
-                $.get('/js/mustachejs-templates/noticias-list.html', function(template){
-                    var list = '<tr><td colspan="5"><h2>No hay noticias aún</h2></td></tr>';
-                    if (data != '') {
-                        list = $.mustache(template, noticias);
-                    }
-                    $('tbody.news-list').html(list);
-                    $("[rel='tooltip']").tooltip();
-                });
-            });
-        {% elseif app.request.getRequestUri == '/admin/consultas' %}
-            $.getJSON('/api/consultas', function(data){
-                var consultas = {
-                    consulta: data
-                };
-                $.get('/js/mustachejs-templates/consultas-list.html', function(template){
-                    var list = '<tr><td colspan="8"><h2>No hay consultas aún</h2></td></tr>';
-                    if (data != '') {
-                        list = $.mustache(template, consultas);
-                    }
-                    $('tbody.comments-list').html(list);
-                    $("[rel='tooltip']").tooltip();
-                });
-            });
-        {% elseif app.request.getRequestUri == '/admin/borrador' %}
-            $.getJSON('/api/borrador', function(data){
-                var noticias = {
-                    noticia: data
-                };
-                $.get('/js/mustachejs-templates/noticias-list.html', function(template){
-                    var list = '<tr><td colspan="8"><h2>No hay borradores aún</h2></td></tr>';
-                    if (data != '') {
-                        list = $.mustache(template, noticias);
-                    }
-                    $('tbody.draft-list').html(list);
-                    $("[rel='tooltip']").tooltip();
-                });
-            });
-        {% elseif app.request.getRequestUri == '/admin/papelera' %}
-            $.getJSON('/api/papelera', function(data){
-                var noticias = {
-                    noticia: data
-                };
-                $.get('/js/mustachejs-templates/papelera-list.html', function(template){
-                    var list = '<tr><td colspan="8"><h2>No hay noticias eliminadas aún</h2></td></tr>';
-                    if (data != '') {
-                        list = $.mustache(template, noticias);
-                    }
-                    $('tbody.recycle-list').html(list);
-                    $("[rel='tooltip']").tooltip();
-                });
-            });
-        {% elseif app.request.getRequestUri == '/admin/historial' %}
-            $.getJSON('/api/historial', function(data){
-                var noticias = {
-                    noticia: data
-                };
-                $.get('/js/mustachejs-templates/noticias-list.html', function(template){
-                    var list = '<tr><td colspan="8"><h2>No hay historial aún</h2></td></tr>';
-                    if (data != '') {
-                        list = $.mustache(template, noticias);
-                    }
-                    $('tbody.history-list').html(list);
-                    $("[rel='tooltip']").tooltip();
-                });
-            });
-        {% elseif app.request.getRequestUri == '/admin/programadas' %}
-            $.getJSON('/api/programadas', function(data){
-                var noticias = {
-                    noticia: data
-                };
-                $.get('/js/mustachejs-templates/noticias-list.html', function(template){
-                    var list = '<tr><td colspan="8"><h2>No hay noticias programadas aún</h2></td></tr>';
-                    if (data != '') {
-                        list = $.mustache(template, noticias);
-                    }
-                    $('tbody.scheduled-list').html(list);
-                    $("[rel='tooltip']").tooltip();
-                });
-            });
+        $("[rel='tooltip']").tooltip();
+        {% set tiny = ['/admin/papelera', '/admin/historial', '/admin/consultas']%}
+        {% if app.request.getRequestUri in tiny %}
+        var sorter = new TINY.table.sorter('sorter','table',{
+            headclass:'head',
+            ascclass:'asc',
+            descclass:'desc',
+            evenclass:'evenrow',
+            oddclass:'oddrow',
+            evenselclass:'evenselected',
+            oddselclass:'oddselected',
+            paginate:true,
+            size:10,
+            colddid:'columns',
+            currentid:'currentpage',
+            totalid:'totalpages',
+            startingrecid:'startrecord',
+            endingrecid:'endrecord',
+            totalrecid:'totalrecords',
+            pageddid:'pagedropdown',
+            navid:'search_results',
+            init:true
+        });
+        $('.first-page').on('click', function(){ sorter.mueve(-1,true); });
+        $('.prev-page').on('click', function(){ sorter.mueve(-1); });
+        $('.next-page').on('click', function(){ sorter.mueve(1); });
+        $('.last-page').on('click', function(){ sorter.mueve(1,true); });
+        $('#results-per-page').on('change', function(){ sorter.size(this.value) });
+        $('#columns').on('change', function(){ sorter.search('query') });
+        $('#query').on('keyup', function(){ sorter.search('query') });
+        $('.reset-tiny-table').on('click', function(){ sorter.reset(); });
+        $('.showall-tiny-table').on('click', function(){ sorter.showall(); });
         {% endif %}
     });
 </script>

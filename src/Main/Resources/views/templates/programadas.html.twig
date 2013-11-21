@@ -15,10 +15,25 @@
                                 <th>Titulo</th>
                                 <th>Creado</th>
                                 <th>Actualizado</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody class="scheduled-list"></tbody>
+                        <tbody>
+                            {% for noticia in noticias %}
+                            <tr>
+                                <td>{{ noticia.id }}</td>
+                                <td>{{ noticia.titulo }}</td>
+                                <td>{{ noticia.creado }}</td>
+                                <td>{{ noticia.actualizado }}</td>
+                                <td>
+                                    <a class="btn btn-info btn-xs entity" href="/api/{{ noticia.id }}/" rel="tooltip" title="Detalle"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                    <a class="btn btn-warning btn-xs entity" href="/api/{{ noticia.id }}/" rel="tooltip" title="Editar"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-danger btn-xs entity" href="/api/{{ noticia.id }}/" rel="tooltip" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
                     </table>
                 </div>
 {% endblock %}

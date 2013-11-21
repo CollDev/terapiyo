@@ -1,6 +1,0 @@
-<?php
-$emlusername   = 'user@mail.com';
-$emlpassword   = '';
-$emlserver     = 'localhost';
-$port       = 465;
-$encryption = 'ssl';

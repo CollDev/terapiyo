@@ -11,40 +11,68 @@ $app->get('/', function() use($app) {
 
 // GET /admin Admin
 $app->get('/admin', function() use($app) {
-    $response = $app['twig']->render('templates/admin.html.twig');
+    $sql = "SELECT * FROM `noticia` WHERE `estado` = '1' AND `inicio` < NOW() AND NOW() < `fin` ORDER BY `id` DESC;";
+    $statement = $app['db']->prepare($sql);
+    $statement->execute();
+    $noticias = $statement->fetchAll();
+    $response = $app['twig']->render('templates/admin.html.twig', array('noticias' => $noticias));
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('admin');
 
 // GET /admin Admin
 $app->get('/admin/borrador', function() use($app) {
-    $response = $app['twig']->render('templates/borrador.html.twig');
+    $sql = "SELECT * FROM `noticia` WHERE `estado` = '0';";
+    $statement = $app['db']->prepare($sql);
+    $statement->execute();
+    $noticias = $statement->fetchAll();
+    $response = $app['twig']->render('templates/borrador.html.twig', array('noticias' => $noticias));
+    
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('borrador');
 
+// GET /programadas Programadas
+$app->get('/admin/programadas', function() use($app) {
+    $sql = "SELECT * FROM `noticia` WHERE `inicio` > NOW() ORDER BY `id` DESC;";
+    $statement = $app['db']->prepare($sql);
+    $statement->execute();
+    $noticias = $statement->fetchAll();
+    $response = $app['twig']->render('templates/programadas.html.twig', array('noticias' => $noticias));
+    
+    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
+})->bind('programadas');
+
 // GET /admin Admin
 $app->get('/admin/papelera', function() use($app) {
-    $response = $app['twig']->render('templates/papelera.html.twig');
+    $sql = "SELECT * FROM `noticia` WHERE `estado` = '2';";
+    $statement = $app['db']->prepare($sql);
+    $statement->execute();
+    $noticias = $statement->fetchAll();
+    $response = $app['twig']->render('templates/papelera.html.twig', array('noticias' => $noticias));
+    
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('papelera');
 
 // GET /admin Admin
 $app->get('/admin/historial', function() use($app) {
-    $response = $app['twig']->render('templates/historial.html.twig');
+    $sql = "SELECT * FROM `noticia` WHERE `fin` < NOW();";
+    $statement = $app['db']->prepare($sql);
+    $statement->execute();
+    $noticias = $statement->fetchAll();
+    $response = $app['twig']->render('templates/historial.html.twig', array('noticias' => $noticias));
+    
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('historial');
 
 // GET /consultas Consultas
 $app->get('/admin/consultas', function() use($app) {
-    $response = $app['twig']->render('templates/consultas.html.twig');
+    $sql = "SELECT * FROM `correo` WHERE `estado` = '0' OR `estado` = '1' ORDER BY `id` DESC;";
+    $statement = $app['db']->prepare($sql);
+    $statement->execute();
+    $consultas = $statement->fetchAll();
+    $response = $app['twig']->render('templates/consultas.html.twig', array('consultas' => $consultas));
+    
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('consultas');
-
-// GET /programadas Programadas
-$app->get('/admin/programadas', function() use($app) {
-    $response = $app['twig']->render('templates/programadas.html.twig');
-    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
-})->bind('programadas');
-
 
 // POST /feedback
 $app->post('/feedback', function(Request $request) use($app) {
@@ -76,7 +104,7 @@ $app->post('/feedback', function(Request $request) use($app) {
                 $sent = $app['mailer']->send($message);
                 
                 //guardar en la base de datos
-                $sql = "INSERT INTO `correo` (`creado`, `estado`, " . implode(', ', array_keys($data)) . ") VALUES (NOW(), '1', '" . implode("', '", $data) . "');";
+                $sql = "INSERT INTO `correo` (`creado`, `estado`, " . implode(', ', array_keys($data)) . ") VALUES (NOW(), '0', '" . implode("', '", $data) . "');";
                 $inserted = $app['db']->executeUpdate($sql);
                 
                 if ($sent && $inserted) {
@@ -110,6 +138,7 @@ $app->get('/api/', function() use($app) {
     $statement = $app['db']->prepare($sql);
     $statement->execute();
     $noticias = $statement->fetchAll();
+    
     return new Response(json_encode($noticias), 200, array('Content-Type' => 'application/json'));
 });
 
@@ -125,6 +154,7 @@ $app->post('/api/', function(Request $request) use ($app) {
     parse_str($request->getContent(), $data);
     $sql = "INSERT INTO `noticia` (`creado`, " . implode(', ', array_keys($data)) . ") VALUES (NOW(), '" . implode("', '", $data) . "');";
     $affected_rows = $app['db']->executeUpdate($sql);
+    
     return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
 })->bind('create');
 
@@ -139,6 +169,7 @@ $app->put('/api/{id}/', function($id, Request $request) use ($app) {
     }
     $sql = "UPDATE `noticia` SET " . implode(', ', $data_mod) . " WHERE `id` = ?;";
     $affected_rows = $app['db']->executeUpdate($sql, array((int) $id));
+    
     return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
 });
 
@@ -158,53 +189,20 @@ $app->post('/api/{id}/', function($id) use ($app) {
 
 // PATCH /api/recuperar/{id} Delete
 $app->post('/api/recuperar/{id}/', function($id) use ($app) {
-    $sql = "UPDATE `noticia` SET `estado` = '1' WHERE `id` = ?;";
+    $sql = "UPDATE `noticia` SET `estado` = '0' WHERE `id` = ?;";
     $affected_rows = $app['db']->executeUpdate($sql, array((int) $id));
     return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
 });
 
-// GET /api/borrador List
-$app->get('/api/borrador', function() use($app) {
-    $sql = "SELECT * FROM `noticia` WHERE `estado` = '0';";
-    $statement = $app['db']->prepare($sql);
-    $statement->execute();
-    $noticias = $statement->fetchAll();
-    return new Response(json_encode($noticias), 200, array('Content-Type' => 'application/json'));
-});
+// GET /api/consulta/{id} Show
+$app->get('/api/consulta/{id}/', function($id) use ($app) {
+    $update = "UPDATE `correo` SET `estado` = '1' WHERE `id` = ?;";
+    $app['db']->executeUpdate($update, array((int) $id));
+    
+    $sql = "SELECT * FROM `correo` WHERE `id` = ?;";
+    $noticia = $app['db']->fetchAssoc($sql, array((int) $id));
 
-// GET /api/historial List
-$app->get('/api/historial', function() use($app) {
-    $sql = "SELECT * FROM `noticia` WHERE `fin` < NOW();";
-    $statement = $app['db']->prepare($sql);
-    $statement->execute();
-    $noticias = $statement->fetchAll();
-    return new Response(json_encode($noticias), 200, array('Content-Type' => 'application/json'));
-});
-// GET /api/papelera List
-$app->get('/api/papelera', function() use($app) {
-    $sql = "SELECT * FROM `noticia` WHERE `estado` = '2';";
-    $statement = $app['db']->prepare($sql);
-    $statement->execute();
-    $noticias = $statement->fetchAll();
-    return new Response(json_encode($noticias), 200, array('Content-Type' => 'application/json'));
-});
-
-// GET /api/consulta List
-$app->get('/api/consultas', function() use($app) {
-    $sql = "SELECT * FROM `correo` WHERE `estado` = '1' ORDER BY `id` DESC;";
-    $statement = $app['db']->prepare($sql);
-    $statement->execute();
-    $consultas = $statement->fetchAll();
-    return new Response(json_encode($consultas), 200, array('Content-Type' => 'application/json'));
-});
-
-// GET /api/programadas List
-$app->get('/api/programadas', function() use($app) {
-    $sql = "SELECT * FROM `noticia` WHERE `inicio` > NOW() ORDER BY `id` DESC;";
-    $statement = $app['db']->prepare($sql);
-    $statement->execute();
-    $consultas = $statement->fetchAll();
-    return new Response(json_encode($consultas), 200, array('Content-Type' => 'application/json'));
+    return new Response(json_encode($noticia), 200, array('Content-Type' => 'application/json'));
 });
 //end Routing
 

@@ -9,6 +9,24 @@ $(document).on('click', 'a.entity', function(e){
     $('#terapiyoModal').html('')
     $.get('/js/mustachejs-templates/' + $($this).data('original-title') + '.html', function(template){
         $.getJSON($($this).attr('href'), function(data){
+            $.each(data, function(key, value) {
+                if (key === 'estado') {
+                    switch (value) {
+                        case "0":
+                            data[key] = 'Borrador';
+                            template = template.replace('option value="0"', 'option value="1" selected')
+                            break;
+                        case "1":
+                            data[key] = 'Activo';
+                            template = template.replace('option value="1"', 'option value="1" selected')
+                            break;
+                        case "2":
+                            data[key] = 'Papelera';
+                            template = template.replace('<option value="0">Borrador</option>', '<option value="0">Borrador</option><option value="2" selected>Borrador</option>')
+                            break;
+                    }
+                }
+            });
             modal = $.mustache(template, data);
             $('#terapiyoModal').html(modal).modal();
         });
@@ -220,6 +238,33 @@ $(document).on('click', '.recuperar-noticia', function(e){
             top = true;
             reload = true;
             message = 'Noticia recuperada satisfactoriamente.';
+            $form.each(function(){
+                this.reset();
+            });
+            $('button.close').trigger('click');
+        }
+        $('#flash_message').html('<strong id="flash_title"></strong>&nbsp;&nbsp;').append(message).message(type, title, '#flash_title', top, reload);
+    });
+});
+$(document).on('click', '.responder-consulta', function(e){
+    e.preventDefault();
+    $form = $('form#answer-comment');
+    $.ajax({
+        type: "POST",
+        url: $form.attr("action")
+    }).done(function(data){
+        var type = 'danger';
+        var title = 'Error';
+        var top = false;
+        var reload = true;
+        var message = 'No se pudo responder la consulta.';
+        if (data == 1) {
+            $('#flash_message').remove();
+            type = 'success';
+            title = 'Éxito';
+            top = true;
+            reload = true;
+            message = 'Consulta respondida satisfactoriamente.';
             $form.each(function(){
                 this.reset();
             });

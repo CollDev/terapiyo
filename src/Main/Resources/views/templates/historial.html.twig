@@ -7,18 +7,70 @@
                         <span class="glyphicon glyphicon-file"></span>
                     </a>
                 </h1>
+                <div class="search row">
+                    <div class="input-group col-xs-12 col-sm-12 col-md-6">
+                        <select class="form-control input-group-addon tiny-search" id="columns"></select>
+                        <input class="form-control tiny-search" type="text" id="query" placeholder="Ingrese su búsqueda" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group col-xs-12 col-sm-6 col-md-3">
+                        <select class="form-control" id="results-per-page">
+                            <option value="5" selected>5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        <span class="input-group-addon">Resultados por página</span>
+                    </div>
+                    <div class="input-group col-xs-12 col-sm-6 col-md-3">
+                        <span class="input-group-addon">Página</span>
+                        <select class="form-control" id="pagedropdown"></select>
+                        <span class="input-group-addon"><span style="display:none" id="currentpage"></span> de <span id="totalpages"></span></span>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <ul class="pager">
+                            <li><a href="#" style="white-space:nowrap;">Consultas del <span id="startrecord"></span> al <span id="endrecord"></span> de <span id="totalrecords"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+                        <ul class="pagination">
+                            <li class="disabled"><a class="first-page" href="#"><<</a></li>
+                            <li class="disabled"><a class="prev-page" href="#"><</a></li>
+                            <li><a class="next-page" href="#">></a></li>
+                            <li><a class="last-page" href="#">>></a></li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-condensed">
+                    <table class="table table-bordered table-striped table-condensed table-hover tinytable" id="table">
                         <thead>
                             <tr>
-                                <th>Nº</th>
-                                <th>Titulo</th>
-                                <th>Creado</th>
-                                <th>Actualizado</th>
-                                <th>Acciones</th>
+                                <th class="nosort"><span>Nº</span></th>
+                                <th><span>Titulo</span></th>
+                                <th><span>Creado</span></th>
+                                <th><span>Actualizado</span></th>
+                                <th><span>Estado</span></th>
+                                <th><span>Acciones</span></th>
                             </tr>
                         </thead>
-                        <tbody class="history-list"></tbody>
+                        <tbody>
+                            {% for noticia in noticias %}
+                            <tr>
+                                <td>{{ noticia.id }}</td>
+                                <td>{{ noticia.titulo }}</td>
+                                <td>{{ noticia.creado }}</td>
+                                <td>{{ noticia.actualizado }}</td>
+                                <td>{{ noticia.estado }}</td>
+                                <td>
+                                    <a class="btn btn-info btn-xs entity" href="/api/{{ noticia.id }}/" rel="tooltip" title="Detalle"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                    <a class="btn btn-warning btn-xs entity" href="/api/{{ noticia.id }}/" rel="tooltip" title="Editar"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-danger btn-xs entity" href="/api/{{ noticia.id }}/" rel="tooltip" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
                     </table>
                 </div>
 {% endblock %}

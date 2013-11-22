@@ -2,58 +2,62 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Responder consulta</h4>
+            <h4 class="modal-title">Detalle de consulta</h4>
         </div>
         <div class="modal-body">
-            <div id="flash_message" class="alert hidden">
-                <strong id="flash_title"></strong>
-            </div>
-            <form action="/answer" id="answer-comment" class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="titulo">Nombre</label>
+                    <label class="col-sm-2 control-label">Nombre</label>
                     <div class="col-sm-10">
                         <p class="form-control-static">{{ nombre }}</p>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="contenido">Telefono</label>
+                    <label class="col-sm-2 control-label">Telefono</label>
                     <div class="col-sm-10">
                         <p class="form-control-static">{{ telefono }}</p>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="inicio">Email</label>
+                    <label class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-10">
                         <p class="form-control-static">{{ email }}</p>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="fin">Enviado</label>
+                    <label class="col-sm-2 control-label">Enviado</label>
                     <div class="col-sm-10">
                         <p class="form-control-static">{{ creado }}</p>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="fin">Consulta</label>
+                    <label class="col-sm-2 control-label">Consulta</label>
                     <div class="col-sm-10">
                         <p class="form-control-static">{{ consulta }}</p>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="respuesta">Respuesta</label>
+                    <label class="col-sm-2 control-label">Leído</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" id="respuesta" name="respuesta"></textarea>
+                        <p class="form-control-static">{{ leido }}</p>
                     </div>
                 </div>
-                <input id="id" name="id" type="hidden" value="{{ id }}">
-                <input id="nombre" name="nombre" type="hidden" value="{{ nombre }}">
-                <input id="email" name="email" type="hidden" value="{{ email }}">
-                <input id="consulta" name="consulta" type="hidden" value="{{ consulta }}">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Respondido</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">{{ leido }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Respuesta</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">{{ respuesta }}</p>
+                    </div>
+                </div>
             </form>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-success responder-consulta">Responder</button>
         </div>
     </div>
 </div>

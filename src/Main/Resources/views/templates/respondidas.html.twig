@@ -1,13 +1,8 @@
 {% extends 'admin-layout.html.twig' %}
 
 {% block container %}
-                <h1>
-                    Papelera
-                    <a class="btn btn-primary entity pull-right" href="{{ path('create') }}" rel="tooltip" title="Nuevo">
-                        <span class="glyphicon glyphicon-file"></span>
-                    </a>
-                </h1>
-                <div class="row">
+                <h1>Consultas</h1>
+                <div class="search row">
                     <div class="input-group col-xs-12 col-sm-12 col-md-6">
                         <select class="form-control input-group-addon tiny-search" id="columns"></select>
                         <input class="form-control tiny-search" type="text" id="query" placeholder="Ingrese su búsqueda" />
@@ -48,23 +43,23 @@
                         <thead>
                             <tr>
                                 <th class="nosort"><span>Nº</span></th>
-                                <th><span>Titulo</span></th>
-                                <th><span>Creado</span></th>
-                                <th><span>Actualizado</span></th>
-                                <th><span>Acciones</span></th>
+                                <th><span>Nombre</span></th>
+                                <th><span>Teléfono</span></th>
+                                <th><span>Email</span></th>
+                                <th><span>Respondido</span></th>
+                                <th class="nosort"><span>Acciones</span></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for noticia in noticias %}
+                            {% for consulta in consultas %}
                             <tr>
                                 <td>{{ loop.index }}</td>
-                                <td>{{ noticia.titulo }}</td>
-                                <td>{{ noticia.creado }}</td>
-                                <td>{{ noticia.actualizado }}</td>
+                                <td>{{ consulta.nombre }}</td>
+                                <td>{{ consulta.telefono }}</td>
+                                <td>{{ consulta.email }}</td>
+                                <td>{{ consulta.respondido }}</td>
                                 <td>
-                                    <a class="btn btn-info btn-xs entity" href="/api/{{ noticia.id }}/" rel="tooltip" title="Detalle"><span class="glyphicon glyphicon-eye-open"></span></a>
-                                    <a class="btn btn-warning btn-xs entity" href="/api/{{ noticia.id }}/" rel="tooltip" title="Recuperar"><span class="glyphicon glyphicon-refresh"></span></a>
-                                    <a class="btn btn-danger btn-xs entity" href="/api/{{ noticia.id }}/" rel="tooltip" title="Purgar"><span class="glyphicon glyphicon-remove"></span></a>
+                                    <a class="btn btn-info btn-xs entity" href="/api/consulta/{{ consulta.id }}/" rel="tooltip" title="VerConsulta"><span class="glyphicon glyphicon-eye-open"></span></a>
                                 </td>
                             </tr>
                             {% endfor %}

@@ -13,7 +13,7 @@ mailer:
     password:   
     port:       465
     encryption: ssl
-    auth_mode:  smtp
+    auth_mode:  ~
 
 locale:         en
 secret:         ThisTokenIsNotSoSecretChangeIt

@@ -22,7 +22,7 @@
                         <tbody>
                             {% for noticia in noticias %}
                             <tr>
-                                <td>{{ noticia.id }}</td>
+                                <td>{{ loop.index }}</td>
                                 <td>{{ noticia.titulo }}</td>
                                 <td>{{ noticia.creado }}</td>
                                 <td>{{ noticia.actualizado }}</td>

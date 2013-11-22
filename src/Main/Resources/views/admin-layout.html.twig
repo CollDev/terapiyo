@@ -32,7 +32,13 @@
                     <li><a href="{{ path('historial') }}">Historial</a></li>
                 </ul>
             </li>
-            <li><a href="{{ path('consultas') }}">Consultas</a></li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Consultas<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('consultas') }}">Pendientes</a></li>
+                    <li><a href="{{ path('respondidas') }}">Respondidas</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </nav>

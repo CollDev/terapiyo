@@ -1,20 +1,32 @@
 mailer:
-    subject: Mensaje desde la página web
-    body: >
+    subject: Consulta desde la web Terapiyo
+    body: |
         <html>
-         <head></head>
-         <body>Hola:
-
-        Nombre:  %s
-        Telefono: %s
-        Email: %s
-        Escribió la siguiente consulta:
-        %s
-
-        Que tenga un buen dia.
-         </body>
+            <head></head>
+            <body>
+                <p>Hola:</p>
+                <p>&nbsp;</p>
+                <p>Nombre:  %s</p>
+                <p>Telefono: %s</p>
+                <p>Email: %s</p>
+                <p>Escribió la siguiente consulta:</p>
+                <p>%s</p>
+                <p>&nbsp;</p>
+                <p>Que tenga un buen dia.</p>
+            </body>
         </html>
 
+    answer: |
+        <html>
+            <head></head>
+            <body>
+                <p>Estimad@:  %s</p>
+                <p>Con respecto a su consulta:</p>
+                <p>%s</p>
+                <p>&nbsp;</p>
+                <p>%s</p>
+            </body>
+        </html>
 admin:
     responses:
         

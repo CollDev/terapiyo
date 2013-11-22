@@ -27,6 +27,9 @@ CREATE TABLE IF NOT EXISTS `correo` (
   `email` varchar(255) NOT NULL,
   `consulta` text NOT NULL,
   `creado` datetime NOT NULL,
+  `leido` datetime NOT NULL,
+  `respondido` datetime NOT NULL,
+  `respuesta` text NOT NULL,
   `estado` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;

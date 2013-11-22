@@ -8,6 +8,15 @@ $(document).on('click', 'a.entity', function(e){
     var $this = this;
     $('#terapiyoModal').html('')
     $.get('/js/mustachejs-templates/' + $($this).data('original-title') + '.html', function(template){
+        if ($($this).data('original-title') === 'Leer') {
+            $($this)
+                .attr('data-original-title', 'Responder')
+                .removeClass('btn-primary')
+                .addClass('btn-success')
+                .find('span')
+                .removeClass('glyphicon-book')
+                .addClass('glyphicon-send');
+        }
         $.getJSON($($this).attr('href'), function(data){
             $.each(data, function(key, value) {
                 if (key === 'estado') {
@@ -251,14 +260,16 @@ $(document).on('click', '.responder-consulta', function(e){
     $form = $('form#answer-comment');
     $.ajax({
         type: "POST",
-        url: $form.attr("action")
+        url: $form.attr("action"),
+        data: $form.serialize(),
+        dataType: "json"
     }).done(function(data){
         var type = 'danger';
         var title = 'Error';
         var top = false;
         var reload = true;
         var message = 'No se pudo responder la consulta.';
-        if (data == 1) {
+        if (data.responseCode == 200) {
             $('#flash_message').remove();
             type = 'success';
             title = 'Éxito';

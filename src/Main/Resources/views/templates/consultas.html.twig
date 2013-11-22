@@ -53,7 +53,7 @@
                         <tbody>
                             {% for consulta in consultas %}
                             <tr>
-                                <td>{{ consulta.id }}</td>
+                                <td>{{ loop.index }}</td>
                                 <td>{{ consulta.nombre }}</td>
                                 <td>{{ consulta.telefono }}</td>
                                 <td>{{ consulta.email }}</td>

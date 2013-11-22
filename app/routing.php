@@ -73,6 +73,15 @@ $app->get('/admin/consultas', function() use($app) {
     
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('consultas');
+$app->get('/admin/respondidas', function() use($app) {
+    $sql = "SELECT * FROM `correo` WHERE `estado` = '2' ORDER BY `id` DESC;";
+    $statement = $app['db']->prepare($sql);
+    $statement->execute();
+    $consultas = $statement->fetchAll();
+    $response = $app['twig']->render('templates/respondidas.html.twig', array('consultas' => $consultas));
+    
+    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
+})->bind('respondidas');
 
 // POST /feedback
 $app->post('/feedback', function(Request $request) use($app) {
@@ -131,6 +140,56 @@ $app->post('/feedback', function(Request $request) use($app) {
     }
     return new Response(json_encode($return), 200, array('Content-Type' => 'application/json'));
 })->bind('feedback');
+
+// POST /answer
+$app->post('/answer', function(Request $request) use($app) {
+    parse_str($request->getContent(), $data);
+    $data_mod = array();
+    foreach ($data as $key => $value) {
+        if ($key != '_method') {
+            $data_mod[] = "`$key` = '$value'";
+        }
+    }
+    $data_mod[] = "`respondido` = NOW()";
+    $data_mod[] = "`estado` = '2'";
+    
+    if ($data['id'] != '' && $data['nombre'] != '' && $data['email'] != '' && $data['consulta'] != '' && $data['respuesta'] != '') {
+        $id = $data['id'];
+        $nombre = $data['nombre'];
+        $email = $data['email'];
+        $consulta = $data['consulta'];
+        $respuesta  = $data['respuesta'];
+
+        if ($respuesta != '') {
+            $message = \Swift_Message::newInstance()
+                ->setSubject($app['settings']['mailer']['subject'])
+                ->setFrom($app['swiftmailer.options']['username'])
+                ->setTo($email)
+                ->setBody(sprintf($app['settings']['mailer']['answer'], $nombre, $consulta, $respuesta), 'text/html');
+
+            $sent = $app['mailer']->send($message);
+
+            //guardar en la base de datos
+            $sql = "UPDATE `correo` SET " . implode(', ', $data_mod) . " WHERE `id` = ?;";
+            $inserted = $app['db']->executeUpdate($sql, array((int) $id));
+
+            if ($sent && $inserted) {
+                $return = array('responseCode' => 200, 'response' => 'Consulta enviada y almacenada.');
+            } else if ($sent) {
+                $return = array('responseCode' => 200, 'response' => 'Consulta enviada.');
+            } else if ($inserted) {
+                $return = array('responseCode' => 200, 'response' => 'Consulta almacenada.');
+            } else {
+                $return = array('responseCode' => 400, 'response' => 'No se pudo enviar, intente más tarde.');
+            }
+        } else {
+            $return = array('responseCode' => 400, 'response' => 'Debe ingresar una respuesta.');
+        }
+    } else {
+        $return = array('responseCode' => 400, 'response' => 'Debe usar el formulario de contácto de la página web.');
+    }
+    return new Response(json_encode($return), 200, array('Content-Type' => 'application/json'));
+})->bind('answer');
 
 // GET /api List
 $app->get('/api/', function() use($app) {
@@ -196,7 +255,7 @@ $app->post('/api/recuperar/{id}/', function($id) use ($app) {
 
 // GET /api/consulta/{id} Show
 $app->get('/api/consulta/{id}/', function($id) use ($app) {
-    $update = "UPDATE `correo` SET `estado` = '1' WHERE `id` = ?;";
+    $update = "UPDATE `correo` SET `estado` = '1', `leido` = NOW() WHERE `id` = ?;";
     $app['db']->executeUpdate($update, array((int) $id));
     
     $sql = "SELECT * FROM `correo` WHERE `id` = ?;";

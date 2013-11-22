@@ -1,14 +1,15 @@
 {% extends 'admin-layout.html.twig' %}
 
 {% block container %}
+                {% if consultas|length > 0 %}
                 <h1>Consultas</h1>
-                <div class="search row">
+                <div class="advanced_search row hidden">
                     <div class="input-group col-xs-12 col-sm-12 col-md-6">
                         <select class="form-control input-group-addon tiny-search" id="columns"></select>
                         <input class="form-control tiny-search" type="text" id="query" placeholder="Ingrese su búsqueda" />
                     </div>
                 </div>
-                <div class="row">
+                <div class="row hidden" id="advanced_search">
                     <div class="input-group col-xs-12 col-sm-6 col-md-3">
                         <select class="form-control" id="results-per-page">
                             <option value="5">5</option>
@@ -43,10 +44,10 @@
                         <thead>
                             <tr>
                                 <th class="nosort"><span>Nº</span></th>
-                                <th><span>Nombre</span></th>
-                                <th><span>Teléfono</span></th>
-                                <th><span>Email</span></th>
-                                <th><span>Creado</span></th>
+                                <th><span><i class="glyphicon glyphicon-sort"></i>Nombre</span></th>
+                                <th><span><i class="glyphicon glyphicon-sort"></i>Teléfono</span></th>
+                                <th><span><i class="glyphicon glyphicon-sort"></i>Email</span></th>
+                                <th><span><i class="glyphicon glyphicon-sort"></i>Creado</span></th>
                                 <th class="nosort"><span>Acciones</span></th>
                             </tr>
                         </thead>
@@ -70,4 +71,7 @@
                         </tbody>
                     </table>
                 </div>
+                {% else %}
+                <h2>No hay consultas pendientes</h2>
+                {% endif %}
 {% endblock %}

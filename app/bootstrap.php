@@ -5,8 +5,9 @@ use Silex\Provider\UrlGeneratorServiceProvider as Url;
 use Silex\Provider\HttpCacheServiceProvider as Cache;
 use Silex\Provider\DoctrineServiceProvider as Doctrine;
 use Silex\Provider\SwiftmailerServiceProvider as Swiftmailer;
-use Symfony\Component\Yaml\Parser as Parser;
+use Symfony\Component\Yaml\Parser;
 use Symfony\Component\HttpFoundation\Request;
+use Main\Services\Curso;
 
 $app['debug'] = true;
 $app['locale'] = 'es';
@@ -51,6 +52,11 @@ $app->register(new Twig(), array(
 //Routing
 $app->register(new Url());
 //end Routing
+
+//Curso
+$app['curso'] = $app->protect(function($nombre) {
+    return new Curso($nombre);
+});
 
 // _method hidden input enabled
 Request::enableHttpMethodParameterOverride();

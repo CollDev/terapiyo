@@ -15,3 +15,9 @@
 .pagination, .pager {
     margin: 0;
 }
+.tinytable i.glyphicon {
+    margin-right: 6px;
+}
+.tinytable th.head, .tinytable th.asc, .tinytable th.desc {
+    cursor: pointer;
+}

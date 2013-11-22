@@ -7,7 +7,7 @@ $('span.adul').on('click', function(e){
     e.preventDefault();
     var $this = this;
     var course = $($this).attr('class').substr(8);
-    $.getJSON("/includes/" + course.substring(0, course.length - 5) + ".json", function(data){
+    $.getJSON("/curso/" + course.substring(0, course.length - 5), function(data){
         $.get("/js/mustachejs-templates/modal.html", function(modal){
             var $modal = $.mustache(modal, data);
             $('#terapiyoModal').html($modal).modal();
@@ -16,7 +16,7 @@ $('span.adul').on('click', function(e){
 });
 $('span.ter').on('click', function(e){
     e.preventDefault();
-    $.getJSON("/includes/terapiyo.json", function(data){
+    $.getJSON("/curso/terapiyo", function(data){
         $.get("/js/mustachejs-templates/terapiyo-modal.html", function(modal){
             var $modal = $.mustache(modal, data);
             $('#terapiyoModal').html($modal).modal();

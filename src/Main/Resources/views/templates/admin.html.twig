@@ -1,8 +1,9 @@
 {% extends 'admin-layout.html.twig' %}
 
 {% block container %}
+                {% if noticias|length > 0 %}
                 <h1>
-                    Noticias activas
+                    Noticias
                     <a class="btn btn-primary entity pull-right" href="{{ path('create') }}" rel="tooltip" title="Nuevo">
                         <span class="glyphicon glyphicon-file"></span>
                     </a>
@@ -35,4 +36,7 @@
                         </tbody>
                     </table>
                 </div>
+                {% else %}
+                <h2>Aún no hay noticias.</h2>
+                {% endif %}
 {% endblock %}

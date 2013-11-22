@@ -28,6 +28,10 @@ TINY.table = function() {
         if (t.r.length !== 0) {
             t.l = t.r.length;
             t.w = t.r[0].cells.length;
+            if (t.r.length > this.p.size) {
+                $('#' + this.p.navid).show();
+                $('.' + this.p.navid).show();
+            }
             t.a = [];
             t.c = [];
             this.p.is = this.p.size;
@@ -116,6 +120,10 @@ TINY.table = function() {
             t.d = 0;
             x.className = this.p.ascclass;
         }
+        $(t.h.cells).children().children().removeClass().addClass('glyphicon glyphicon-sort');
+        var addclass = t.h.cells[t.p].className == 'asc' ? 'glyphicon glyphicon-sort-by-attributes' : 'glyphicon glyphicon-sort-by-attributes-alt';
+        $(t.h.cells[t.p]).children().children().removeClass().addClass(addclass);
+        
         for (i = 0; i < t.l; i++) {
             var r = t.r[t.a[i].o].cloneNode(true);
             n.appendChild(r);
@@ -294,9 +302,6 @@ TINY.table = function() {
                 }
             }
         }
-        $('html,body').animate({
-              scrollTop: '214'
-        }, 600);
     };
     sorter.prototype.mueve = function(d, m) {
         this.vea(d == 1 ? (m ? this.d : this.g + 1) : (m ? 1 : this.g - 1));

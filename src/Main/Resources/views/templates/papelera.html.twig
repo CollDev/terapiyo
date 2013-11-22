@@ -1,19 +1,20 @@
 {% extends 'admin-layout.html.twig' %}
 
 {% block container %}
+                {% if noticias|length > 0 %}
                 <h1>
                     Papelera
                     <a class="btn btn-primary entity pull-right" href="{{ path('create') }}" rel="tooltip" title="Nuevo">
                         <span class="glyphicon glyphicon-file"></span>
                     </a>
                 </h1>
-                <div class="row">
+                <div class="advanced_search row hidden">
                     <div class="input-group col-xs-12 col-sm-12 col-md-6">
                         <select class="form-control input-group-addon tiny-search" id="columns"></select>
                         <input class="form-control tiny-search" type="text" id="query" placeholder="Ingrese su búsqueda" />
                     </div>
                 </div>
-                <div class="row">
+                <div class="row hidden" id="advanced_search">
                     <div class="input-group col-xs-12 col-sm-6 col-md-3">
                         <select class="form-control" id="results-per-page">
                             <option value="5">5</option>
@@ -48,10 +49,10 @@
                         <thead>
                             <tr>
                                 <th class="nosort"><span>Nº</span></th>
-                                <th><span>Titulo</span></th>
-                                <th><span>Creado</span></th>
-                                <th><span>Actualizado</span></th>
-                                <th><span>Acciones</span></th>
+                                <th><span><i class="glyphicon glyphicon-sort"></i>Titulo</span></th>
+                                <th><span><i class="glyphicon glyphicon-sort"></i>Creado</span></th>
+                                <th><span><i class="glyphicon glyphicon-sort"></i>Actualizado</span></th>
+                                <th class="nosort"><span>Acciones</span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,4 +72,7 @@
                         </tbody>
                     </table>
                 </div>
+                {% else %}
+                <h2>No hay noticias eliminadas</h2>
+                {% endif %}
 {% endblock %}

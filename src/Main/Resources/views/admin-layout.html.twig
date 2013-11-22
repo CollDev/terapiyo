@@ -60,40 +60,41 @@
 <script src="/js/tinyTableV3.js"></script>
 <script src="/js/admin.js"></script>
 <script>
-    $(document).on('ready', function(){
-        $("[rel='tooltip']").tooltip();
-        {% set tiny = ['/admin/papelera', '/admin/historial', '/admin/consultas']%}
-        {% if app.request.getRequestUri in tiny %}
-        var sorter = new TINY.table.sorter('sorter','table',{
-            headclass:'head',
-            ascclass:'asc',
-            descclass:'desc',
-            evenclass:'evenrow',
-            oddclass:'oddrow',
-            evenselclass:'evenselected',
-            oddselclass:'oddselected',
-            paginate:true,
-            size:10,
-            colddid:'columns',
-            currentid:'currentpage',
-            totalid:'totalpages',
-            startingrecid:'startrecord',
-            endingrecid:'endrecord',
-            totalrecid:'totalrecords',
-            pageddid:'pagedropdown',
-            navid:'search_results',
-            init:true
-        });
-        $('.first-page').on('click', function(){ sorter.mueve(-1,true); });
-        $('.prev-page').on('click', function(){ sorter.mueve(-1); });
-        $('.next-page').on('click', function(){ sorter.mueve(1); });
-        $('.last-page').on('click', function(){ sorter.mueve(1,true); });
-        $('#results-per-page').on('change', function(){ sorter.size(this.value) });
-        $('#columns').on('change', function(){ sorter.search('query') });
-        $('#query').on('keyup', function(){ sorter.search('query') });
-        $('.reset-tiny-table').on('click', function(){ sorter.reset(); });
-        $('.showall-tiny-table').on('click', function(){ sorter.showall(); });
-        {% endif %}
+    $("[rel='tooltip']").tooltip();
+    {% set tiny = ['/admin/papelera', '/admin/historial', '/admin/consultas']%}
+    {% if app.request.getRequestUri in tiny %}
+    var sorter = new TINY.table.sorter('sorter','table',{
+        headclass:'head',
+        ascclass:'asc',
+        descclass:'desc',
+        evenclass:'evenrow',
+        oddclass:'oddrow',
+        evenselclass:'evenselected',
+        oddselclass:'oddselected',
+        paginate:true,
+        size:10,
+        colddid:'columns',
+        currentid:'currentpage',
+        totalid:'totalpages',
+        startingrecid:'startrecord',
+        endingrecid:'endrecord',
+        totalrecid:'totalrecords',
+        pageddid:'pagedropdown',
+        navid:'advanced_search',
+        init:true
     });
+    $('.first-page').on('click', function(){ sorter.mueve(-1,true); });
+    $('.prev-page').on('click', function(){ sorter.mueve(-1); });
+    $('.next-page').on('click', function(){ sorter.mueve(1); });
+    $('.last-page').on('click', function(){ sorter.mueve(1,true); });
+    $('#results-per-page').on('change', function(){ sorter.size(this.value) });
+    $('#columns').on('change', function(){ sorter.search('query') });
+    $('#query').on('keyup', function(){ sorter.search('query') });
+    $('.reset-tiny-table').on('click', function(){ sorter.reset(); });
+    $('.showall-tiny-table').on('click', function(){ sorter.showall(); });
+    $(document).on('click', '.tinytable th', function(){
+        $("[rel='tooltip']").tooltip();
+    });
+    {% endif %}
 </script>
 {% endblock %}

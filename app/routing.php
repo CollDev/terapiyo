@@ -1,6 +1,7 @@
 <?php
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Main\Services\Curso;
 
 //Routing
 // GET / Home
@@ -19,7 +20,7 @@ $app->get('/admin', function() use($app) {
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('admin');
 
-// GET /admin Admin
+// GET /admin/borrador Borrador
 $app->get('/admin/borrador', function() use($app) {
     $sql = "SELECT * FROM `noticia` WHERE `estado` = '0';";
     $statement = $app['db']->prepare($sql);
@@ -30,7 +31,7 @@ $app->get('/admin/borrador', function() use($app) {
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('borrador');
 
-// GET /programadas Programadas
+// GET /admin/programadas Programadas
 $app->get('/admin/programadas', function() use($app) {
     $sql = "SELECT * FROM `noticia` WHERE `inicio` > NOW() ORDER BY `id` DESC;";
     $statement = $app['db']->prepare($sql);
@@ -41,7 +42,7 @@ $app->get('/admin/programadas', function() use($app) {
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('programadas');
 
-// GET /admin Admin
+// GET /admin/papelera Papelera
 $app->get('/admin/papelera', function() use($app) {
     $sql = "SELECT * FROM `noticia` WHERE `estado` = '2';";
     $statement = $app['db']->prepare($sql);
@@ -52,7 +53,7 @@ $app->get('/admin/papelera', function() use($app) {
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('papelera');
 
-// GET /admin Admin
+// GET /admin/historial Historial
 $app->get('/admin/historial', function() use($app) {
     $sql = "SELECT * FROM `noticia` WHERE `fin` < NOW();";
     $statement = $app['db']->prepare($sql);
@@ -63,7 +64,7 @@ $app->get('/admin/historial', function() use($app) {
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('historial');
 
-// GET /consultas Consultas
+// GET /admin/consultas Consultas
 $app->get('/admin/consultas', function() use($app) {
     $sql = "SELECT * FROM `correo` WHERE `estado` = '0' OR `estado` = '1' ORDER BY `id` DESC;";
     $statement = $app['db']->prepare($sql);
@@ -73,6 +74,8 @@ $app->get('/admin/consultas', function() use($app) {
     
     return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
 })->bind('consultas');
+
+// GET /admin/respondidas Consultas respondidas
 $app->get('/admin/respondidas', function() use($app) {
     $sql = "SELECT * FROM `correo` WHERE `estado` = '2' ORDER BY `id` DESC;";
     $statement = $app['db']->prepare($sql);
@@ -138,7 +141,8 @@ $app->post('/feedback', function(Request $request) use($app) {
     } else {
         $return = array('responseCode' => 400, 'response' => 'Debe usar el formulario de contácto de la página web.');
     }
-    return new Response(json_encode($return), 200, array('Content-Type' => 'application/json'));
+
+    return $app->json($return, 200);
 })->bind('feedback');
 
 // POST /answer
@@ -188,8 +192,16 @@ $app->post('/answer', function(Request $request) use($app) {
     } else {
         $return = array('responseCode' => 400, 'response' => 'Debe usar el formulario de contácto de la página web.');
     }
-    return new Response(json_encode($return), 200, array('Content-Type' => 'application/json'));
+
+    return $app->json($return, 200);
 })->bind('answer');
+
+// GET /curso/{nombre}
+$app->get('/curso/{nombre}', function($nombre) use($app) {
+    $curso = $app['curso'];
+    $info = $curso($nombre);
+    return $app->json($info->info(), 200);
+});
 
 // GET /api List
 $app->get('/api/', function() use($app) {
@@ -198,14 +210,14 @@ $app->get('/api/', function() use($app) {
     $statement->execute();
     $noticias = $statement->fetchAll();
     
-    return new Response(json_encode($noticias), 200, array('Content-Type' => 'application/json'));
+    return $app->json($noticias, 200);
 });
 
 // GET /api/{id} Show
 $app->get('/api/{id}/', function($id) use ($app) {
     $sql = "SELECT * FROM `noticia` WHERE `id` = ?;";
     $noticia = $app['db']->fetchAssoc($sql, array((int) $id));
-    return new Response(json_encode($noticia), 200, array('Content-Type' => 'application/json'));
+    return $app->json($noticia, 200);
 });
 
 // POST /api Create
@@ -214,7 +226,7 @@ $app->post('/api/', function(Request $request) use ($app) {
     $sql = "INSERT INTO `noticia` (`creado`, " . implode(', ', array_keys($data)) . ") VALUES (NOW(), '" . implode("', '", $data) . "');";
     $affected_rows = $app['db']->executeUpdate($sql);
     
-    return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
+    return $app->json($affected_rows, 200);
 })->bind('create');
 
 // PUT /api/{id} Update
@@ -229,28 +241,28 @@ $app->put('/api/{id}/', function($id, Request $request) use ($app) {
     $sql = "UPDATE `noticia` SET " . implode(', ', $data_mod) . " WHERE `id` = ?;";
     $affected_rows = $app['db']->executeUpdate($sql, array((int) $id));
     
-    return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
+    return $app->json($affected_rows, 200);
 });
 
 // DELETE /api/{id} Delete
 $app->delete('/api/{id}/', function($id) use ($app) {
     $sql = "DELETE FROM `noticia` WHERE `id` = ?;";
     $affected_rows = $app['db']->executeUpdate($sql, array((int) $id));
-    return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
+    return $app->json($affected_rows, 200);
 });
 
 // PATCH /api/{id} Delete
 $app->post('/api/{id}/', function($id) use ($app) {
     $sql = "UPDATE `noticia` SET `estado` = '2' WHERE `id` = ?;";
     $affected_rows = $app['db']->executeUpdate($sql, array((int) $id));
-    return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
+    return $app->json($affected_rows, 200);
 });
 
 // PATCH /api/recuperar/{id} Delete
 $app->post('/api/recuperar/{id}/', function($id) use ($app) {
     $sql = "UPDATE `noticia` SET `estado` = '0' WHERE `id` = ?;";
     $affected_rows = $app['db']->executeUpdate($sql, array((int) $id));
-    return new Response(json_encode($affected_rows), 200, array('Content-Type' => 'application/json'));
+    return $app->json($affected_rows, 200);
 });
 
 // GET /api/consulta/{id} Show
@@ -261,7 +273,7 @@ $app->get('/api/consulta/{id}/', function($id) use ($app) {
     $sql = "SELECT * FROM `correo` WHERE `id` = ?;";
     $noticia = $app['db']->fetchAssoc($sql, array((int) $id));
 
-    return new Response(json_encode($noticia), 200, array('Content-Type' => 'application/json'));
+    return $app->json($noticia, 200);
 });
 //end Routing
 
@@ -269,10 +281,9 @@ if (!$app['debug']) {
     $app->error(function (\Exception $e, $code) use ($app) {
         if ($code == 404) {
             $response = $app['twig']->render('templates/404.html.twig');
-            return new Response($response, 404);
         } else {
             $response = $app['twig']->render('templates/error.html.twig', array('code' => $code));
-            return new Response($response, $code);
         }
+        return new Response($response, $code);
     });
 }

@@ -1,13 +1,13 @@
 {% extends 'admin-layout.html.twig' %}
 
 {% block container %}
-                {% if noticias|length > 0 %}
                 <h1>
                     Noticias
                     <a class="btn btn-primary entity pull-right" href="{{ path('create') }}" rel="tooltip" title="Nuevo">
                         <span class="glyphicon glyphicon-file"></span>
                     </a>
                 </h1>
+                {% if noticias|length > 0 %}
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-condensed">
                         <thead>

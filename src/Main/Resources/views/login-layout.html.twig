@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Administracion Ingreso{% endblock %}
+{% block stylesheets -%}
+        {{ parent() }}
+<link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
+<link href="/css/admin.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content -%}
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{ path('admin') }}">Terapiyo</a>
+    </div>
+</nav>
+<div class="wrapper">
+    <div id="flash_message" class="alert hidden">
+        <strong id="flash_title"></strong>
+    </div>
+    <div class="container">
+    {% block container %}{% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+<script src="/js/moment.js"></script>
+<script src="/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/js/bootstrap-datetimepicker.es.js"></script>
+<script src="/js/tinyTableV3.js"></script>
+<script src="/js/admin.js"></script>
+{% endblock %}

@@ -274,6 +274,21 @@ $app->get('/api/consulta/{id}/', function($id) use ($app) {
 
     return $app->json($noticia, 200);
 });
+
+$app->get('/login', function(Request $request) use ($app) {
+    return $app['twig']->render('templates/login.html.twig', array(
+        'error'         => $app['security.last_error']($request),
+        'last_username' => $app['session']->get('_security.last_username'),
+    ));
+});
+
+$app->get('/account', function () use ($app) {
+    if (null === $user = $app['session']->get('user')) {
+        return $app->redirect('/login');
+    }
+
+    return "Welcome {$user['username']}!";
+});
 //end Routing
 
 if (!$app['debug']) {

@@ -1,6 +1,7 @@
 {% extends 'admin-layout.html.twig' %}
 
 {% block container %}
+                {% if noticias|length > 0 %}
                 <h1>
                     Borrador
                     <a class="btn btn-primary entity pull-right" href="{{ path('create') }}" rel="tooltip" title="Nuevo">
@@ -35,4 +36,7 @@
                         </tbody>
                     </table>
                 </div>
+                {% else %}
+                <h2>No hay borradores</h2>
+                {% endif %}
 {% endblock %}

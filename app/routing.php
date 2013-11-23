@@ -1,7 +1,6 @@
 <?php
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Main\Services\Curso;
 
 //Routing
 // GET / Home
@@ -17,7 +16,7 @@ $app->get('/admin', function() use($app) {
     $statement->execute();
     $noticias = $statement->fetchAll();
     $response = $app['twig']->render('templates/admin.html.twig', array('noticias' => $noticias));
-    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
+    return new Response($response, 200);
 })->bind('admin');
 
 // GET /admin/borrador Borrador
@@ -28,7 +27,7 @@ $app->get('/admin/borrador', function() use($app) {
     $noticias = $statement->fetchAll();
     $response = $app['twig']->render('templates/borrador.html.twig', array('noticias' => $noticias));
     
-    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
+    return new Response($response, 200);
 })->bind('borrador');
 
 // GET /admin/programadas Programadas
@@ -39,7 +38,7 @@ $app->get('/admin/programadas', function() use($app) {
     $noticias = $statement->fetchAll();
     $response = $app['twig']->render('templates/programadas.html.twig', array('noticias' => $noticias));
     
-    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
+    return new Response($response, 200);
 })->bind('programadas');
 
 // GET /admin/papelera Papelera
@@ -50,7 +49,7 @@ $app->get('/admin/papelera', function() use($app) {
     $noticias = $statement->fetchAll();
     $response = $app['twig']->render('templates/papelera.html.twig', array('noticias' => $noticias));
     
-    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
+    return new Response($response, 200);
 })->bind('papelera');
 
 // GET /admin/historial Historial
@@ -61,7 +60,7 @@ $app->get('/admin/historial', function() use($app) {
     $noticias = $statement->fetchAll();
     $response = $app['twig']->render('templates/historial.html.twig', array('noticias' => $noticias));
     
-    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
+    return new Response($response, 200);
 })->bind('historial');
 
 // GET /admin/consultas Consultas
@@ -72,7 +71,7 @@ $app->get('/admin/consultas', function() use($app) {
     $consultas = $statement->fetchAll();
     $response = $app['twig']->render('templates/consultas.html.twig', array('consultas' => $consultas));
     
-    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
+    return new Response($response, 200);
 })->bind('consultas');
 
 // GET /admin/respondidas Consultas respondidas
@@ -83,7 +82,7 @@ $app->get('/admin/respondidas', function() use($app) {
     $consultas = $statement->fetchAll();
     $response = $app['twig']->render('templates/respondidas.html.twig', array('consultas' => $consultas));
     
-    return new Response($response, 200, array('Cache-Control' => 's-maxage=3600, public'));
+    return new Response($response, 200);
 })->bind('respondidas');
 
 // POST /feedback

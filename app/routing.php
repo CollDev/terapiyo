@@ -26,7 +26,7 @@ $app->get('/admin/borrador', function() use($app) {
     $statement->execute();
     $noticias = $statement->fetchAll();
     $response = $app['twig']->render('templates/borrador.html.twig', array('noticias' => $noticias));
-    
+
     return new Response($response, 200);
 })->bind('borrador');
 
@@ -84,6 +84,23 @@ $app->get('/admin/respondidas', function() use($app) {
     
     return new Response($response, 200);
 })->bind('respondidas');
+
+// GET /admin/change-password
+$app->get('/admin/change-password', function() use($app) {
+    $response = $app['twig']->render('templates/change-password.html.twig');
+    
+    return new Response($response, 200);
+})->bind('change-password-form');
+
+// POST /admin/change-password
+$app->post('/admin/change-password', function(Request $request) use($app) {
+    parse_str($request->getContent(), $data);
+    
+    $token = $app['security']->getToken();
+    $user = $token->getUser();
+    $encoder = $app['security.encoder_factory']->getEncoder($user);
+    $password = $encoder->encodePassword($data['password'], $user->getSalt());
+})->bind('change-password');
 
 // POST /feedback
 $app->post('/feedback', function(Request $request) use($app) {

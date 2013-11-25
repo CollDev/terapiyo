@@ -184,6 +184,18 @@ class Curso
                         ),
                         array(
                             "staff" => array(
+                                array("name" => "Joshue Pichilingue:"),
+                                array(
+                                    "teacher" => array(
+                                        array("experience" => "Tiene formacion de bailarin, estudio en la escuela de Lucy Telge(directora del Ballet Municipal) y en el Ballet de la Universidad de San Marcos."),
+                                        array("experience" => "Estudio Psicologia en la Uniersidad Peruana Unión (Perú) y continuo su formacion en la Universidad Nacional de Educacion a distancia (España), formacion en Lima yoga, Akro Estudio, Ki'ntu, formacion en la Universidad Internacional de la Rioja (España), y talleres de actualizacion y cuidado de la columna tanto en España, Italia y Portugal."),
+                                        array("experience" => "Experiencia laboral en Scene (escuela de artes escenicas), Sport Life, World Gym, Casa del Adulto Mayor, Gimnasia Laboral en el Banco de la Nacion, y el Scotiabank, Cadena del Gol's Gym y en el Club Lima Golf")
+                                    )
+                                )
+                            )
+                        ),
+                        array(
+                            "staff" => array(
                                 array("name" => "Titi Plaza:"),
                                 array(
                                     "teacher" => array(
